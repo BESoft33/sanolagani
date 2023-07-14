@@ -96,7 +96,7 @@
     display: none;
 }
 
-.dropdown{
+.dropdown-entity{
   background:#efefef;
   padding: 10px;
   width: 17rem;
@@ -104,6 +104,11 @@
   position: absolute;
   z-index: 99;
 
+}
+.dropdown{
+    background:#efefef;
+    padding: 10px;
+    margin-top:5px;
 }
 
 .dropdown-content{
