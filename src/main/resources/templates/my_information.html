@@ -22,30 +22,8 @@
     <!-- Dashboard -->
     <section class="dashboard">
         <div class=" dashboard__container">
-            <div class="left__dashboard board" th:fragment="left-fragment">
-                <div class="dashboard-title-wrap">
-                    <div class="dashboard-title"><a th:href="@{/riskinfo}">Dashboard</a></div>
-                    <div class="dashboard-title"><a th:href="@{/myinfo}">My Information</a></div>
-                    <div class="dashboard-title"><a th:href="@{'/investmenthistory/'}">My Investment</a></div>
-
-                    <div class="dropdown-manage-fund">
-                        <button onclick="manageFund()" class="drop-btn">
-                            Manage Fund
-                            <span>&nbsp;v&nbsp;</span>
-                        </button>
-                        <div id="fundManagement" class="fundManagementContent">
-                            <div> <a th:href="@{'/collateralsummery/'+${id}+'/'}"><i
-                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a></div>
-
-                            <div><a th:href="@{'/fundhistory/'+${id}+'/'}"><i
-                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
-                            </div>
-                            <div><a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="left__dashboard board" th:replace="fragment/dashboard.html::left-fragment"> </div>
+            
             <div class="my-info-center board">
                 <div class="center__heading">
                     <div>
@@ -108,8 +86,8 @@
                             </div>
                             <div>
                                 <br>
-                                <a th:href="@{/loadfund}" class="btn btn-primary">Load</a>
-                                <a th:href="@{/refund/collateral}" class="btn">Refund</a>
+                                <a th:href="@{/user/loadfund}" class="btn btn-primary">Load</a>
+                                <a th:href="@{/user/refund/collateral}" class="btn">Refund</a>
                             </div>
                         </div>
                     </div>

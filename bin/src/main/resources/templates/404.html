@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragment/head.html :: headerfiles">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header class='container header__container'
+		th:replace="fragment/header.html :: header"></header>
+
+	<div class='full__width' th:insert="fragment/nav.html :: navbar">
+	</div>
+
+	<!-- page not found -->
+	<!-- css are on style.css -->
+	<section>
+		<div class="container notfound__container">
+			<h1>404</h1>
+			<h2>Oops, Page Not Found</h2>
+			<h4>Sorry, the requested page doesnot exist!!</h4>
+			<a href="/">Go Back To Home Page</a>
+		</div>
+	</section>
+	<!-- Footer -->
+	<footer>
+		<footer th:insert="fragment/footer.html :: footer"></footer>
+	</footer>
+</body>
+</html>

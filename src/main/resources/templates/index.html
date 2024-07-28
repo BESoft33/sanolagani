@@ -7,16 +7,17 @@
 <body>
 	<header class='container header__container'
 		th:replace="fragment/header.html :: header"></header>
-		
+
 	<div class='full__width' th:insert="fragment/nav.html :: navbar"></div>
 
 	<!-- Most Momentum -->
 	<section class='momentum__section'>
 		<div class="container mostfunded__container">
-			<h2>Highest Invest Opportunity</h2>
-			<h5>Offerings that have raised the highest money</h5>
+			<h2>Highest Raising</h2>
+			<h5>Offerings that are raising high capital.</h5>
 			<div class="cards row">
-				<div class="card" th:each="company : ${companybasedoncapital}" th:if="${company.status eq 'raising'}">
+				<div class="card" th:each="company : ${companybasedoncapital}"
+					th:if="${company.status eq 'raising'}">
 					<div th:replace="fragment/company-card.html :: card"></div>
 				</div>
 			</div>
@@ -26,10 +27,11 @@
 	<!-- Most Funded -->
 	<section class='mostfunded__section'>
 		<div class="container mostfunded__container">
-			<h2>Highest Invest Opportunity</h2>
-			<h5>Offerings that have raised the highest money</h5>
+			<h2>Recently Launched</h2>
+			<h5>Companies that are listed recently.</h5>
 			<div class="cards row">
-				<div class="card" th:each="company : ${companybasedondate}" th:if="${company.status eq 'raising'}">
+				<div class="card" th:each="company : ${companybasedondate}"
+					th:if="${company.status eq 'raising'}">
 					<div th:replace="fragment/company-card.html :: card"></div>
 				</div>
 			</div>
@@ -44,21 +46,23 @@
 			<h5>Recommend companies based on feedback</h5>
 			<div class="cards row">
 
-				<div class="card " th:each="company : ${c_list}">
+				<div class="card " th:each="company : ${c_list}"
+					th:if="${company.status eq 'raising'}">
 					<div th:replace="fragment/company-card.html :: card"></div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-<section class='momentum__section'
+	<section class='momentum__section'
 		sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')">
 		<div class="container mostfunded__container">
-			<h2>Diversification</h2>
+			<h2>Diversify your Investments</h2>
 			<h5>Recommend companies based on diversification</h5>
 			<div class="cards row">
 
-				<div class="card " th:each="company : ${diversifiedcompanylist}">
+				<div class="card " th:each="company : ${diversifiedcompanylist}"
+					th:if="${company.status eq 'raising'}">
 					<div th:replace="fragment/company-card.html :: card"></div>
 				</div>
 			</div>

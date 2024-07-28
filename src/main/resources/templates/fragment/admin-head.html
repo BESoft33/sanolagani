@@ -1,0 +1,27 @@
+<head th:fragment="head">
+    <style>
+        ul {
+            list-style: none;
+        }
+        .card li {
+            display: flex;
+            justify-content: space-between;
+        }
+        .stats {
+            width: 180px;
+        }
+
+        table {
+            font-size: 12px;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+        }
+    </style>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/admindashboard.css}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:src="@{/js/dropdown.js}"></script>
+</head>

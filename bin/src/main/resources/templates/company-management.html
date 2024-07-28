@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>View Users</title>
+    <link rel="stylesheet" th:href="@{/css/companydashboard.css}">
+  </head>
+  <body>
+    <div class="container">
+        <div th:replace="fragment/company-dashboard.html :: sidebar"></div>
+    
+        <form th:action="@{/company/management}" method="POST" class="chart-container">
+        <div class="management-input" id="management-input">
+            <input type="number" name="numberOfInputFields" id="numberOfInputFields" value="1" hidden/>
+            <div class="management-input-field" id="input-fields-0">
+                <input type="text" name="firstName-0" class="title" placeholder="First Name" />
+                <input type="text" name="middleName-0" class="title" placeholder="Middle Name" />
+                <input type="text" name="lastName-0" class="title" placeholder="Last Name" />
+                <input type="text" name="title-0" class="title" placeholder="Title" />
+                <input type="text" name="socialLink-0" class="title" placeholder="Social Link" />
+            </div><br/>
+            <button type="button" class="button" id="add-button">Add</button>
+        </div><br>
+        <button type="submit" class="button" style="margin-left:3rem;">Submit</button>
+        </form>
+    </div>
+    <script>
+        let numberOfInputFields = 0;
+        let inputFieldElement = document.querySelector("#numberOfInputFields");
+        let managementInput = document.getElementById("management-input"); //super div
+        
+        let fields = ["firstName-", "middleName-", "lastName-", "title-", "socialLink-"];
+        let placeholders = ["First Name", "Middle Name", "Last Name", "Title", "Social Link"];
+        
+        managementInput.addEventListener("click", function (event) {
+          if (event.target && event.target.matches("#add-button")) {
+            createElement();
+          }
+        });
+        
+        function createElement() {
+          let button = document.querySelector("#add-button");
+          numberOfInputFields++; // Increment numberOfInputFields for the next iteration
+
+          button.remove();
+        
+          let inputFieldsParent = document.createElement("div");
+          inputFieldsParent.setAttribute("class", "management-input-field");
+          inputFieldsParent.setAttribute("id", "input-fields-" + numberOfInputFields);
+          managementInput.appendChild(inputFieldsParent);
+          managementInput.appendChild(document.createElement("br"));
+        
+          for (let i = 0; i < 5; i++) {
+            let newInputField = document.createElement("input");
+            newInputField.setAttribute("type", "text");
+            newInputField.setAttribute("name", fields[i] + parseInt(numberOfInputFields));
+            newInputField.setAttribute("class", "title");
+            newInputField.setAttribute("placeholder", placeholders[i]);
+            inputFieldsParent.appendChild(newInputField);
+            console.log(newInputField);
+          }
+        
+          button = document.createElement("button");
+          button.setAttribute("type", "button");
+          button.setAttribute("class", "button");
+          button.setAttribute("id", "add-button");
+          button.innerHTML = "Add";
+          managementInput.appendChild(button);
+          inputFieldElement.setAttribute("value", numberOfInputFields+1);
+        }
+        
+    </script>
+</body>

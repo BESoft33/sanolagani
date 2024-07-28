@@ -11,18 +11,20 @@
   <section class='mostfunded__section'>
     <div class="container mostfunded__container">
 
-      <h2>Companies</h2>
+      <!-- <h2>Companies</h2> -->
         <div class="dropdown-entity">
           <p class="button" onclick="toggleElements()">
             Filter By Sector&nbsp;
             <i class="fa-solid fa-plus" id="symbol"></i>
           </p>
           <div class="toggle-list" id="toggle-elements">
-            <div class="dropdown-content" th:each="sector : ${sectorlist}">
-              <a href="#" class="dropdown-list">[[${sector}]]</a>
+            <div class="dropdown-content" th:each="sector : ${sectorlist}" th:if="${path} eq 'investment'">
+              <a th:href="@{'/user/company/filter/'+${sector}+'/'+${path}}" class="dropdown-list">[[${sector}]]</a>
+            </div>
+            <div class="dropdown-content" th:each="sector : ${sectorlist}" th:unless="${path} eq 'investment'">
+              <a th:href="@{'/user/company/filter/'+${sector}+'/companies'}" class="dropdown-list">[[${sector}]]</a>
             </div>
           </div>
-        </div>
         </div>
       
       <div class="cards row">

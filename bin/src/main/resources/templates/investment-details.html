@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanolagani</title>
+
+    <head th:replace="fragment/head.html :: headerfiles"></head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class=" dashboard__container">
+            <div class="left__dashboard board" th:replace="fragment/dashboard.html::left-fragment"> </div>
+            
+            <div class="my-info-center board">
+                <table id="customers">
+                    <tr>
+                        <th>Username</th>
+                        <th>amount</th>
+                        <th>transfer date</th>
+                        <th>company_id</th>
+                        <th>quantity</th>
+                        <th>status</th>
+                        <th>REFUNDABLE UNTIL</th>
+                        <th>action</th>
+                    </tr>
+                    <tr th:each="investment: ${investmentlist}">
+                        <td> <a th:text="${name}"></a></td>
+                        <td> <a th:text="${investment.amount}"></a></td>
+                    <td> <p th:text="${#temporals.format(investment.investment_date_time, 'yyyy-MM-dd') + ' ' + #temporals.format(investment.investment_date_time, 'HH:mm:ss')}"></p></td>
+                        <td>
+                            <p th:text="${investment.getCompany().getId()}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${investment.quantity}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${investment.status}"></p>
+                        </td>
+                    <td> <p th:text="${#temporals.format(investment.refundableUntil, 'yyyy-MM-dd') + ' ' + #temporals.format(investment.refundableUntil, 'HH:mm:ss')}"></p></td>
+            
+                            <td th:if="${investment.status eq 'refundable'}">
+                            
+                            <button class="btn refund"
+                                th:onclick="|window.location.href='/tables/refund/${investment.id}'|">Ask Refund</button>
+                            </td>
+                            <td th:unless="${investment.status eq 'refundable'}" class="warning"><i class="fa-solid fa-ban" style="margin-top:7px;"></i><span>&nbsp;not refundable</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <footer th:insert="fragment/footer.html :: footer"></footer>
+
+    </footer>
+    <!-- Fund Management Dropdown Script -->
+    <script>
+        function manageFund() {
+            document.getElementById("fundManagement").classList.toggle("show");
+        }
+    </script>
+</body>
+
+</html>

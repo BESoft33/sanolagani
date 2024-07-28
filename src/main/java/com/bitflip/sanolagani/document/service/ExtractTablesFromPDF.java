@@ -29,7 +29,7 @@ public class ExtractTablesFromPDF {
         this.doc = Loader.loadPDF(new File(this.path));
         File opdir = new File(this.tsvDirectoryPath);
         boolean directoryCreated = opdir.mkdir();
-
+        System.out.println("Directory created: "+ directoryCreated);
         this.sea = new SpreadsheetExtractionAlgorithm();
         StringBuilder text = new StringBuilder();
         PageIterator it = new ObjectExtractor(this.doc).extract();

@@ -1,135 +1,95 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	
-     <meta charset="UTF-8">
-     <title>Dashboard</title>
-     <link rel="stylesheet" href="css/admindashboard.css">
-      
-
-     <link rel="stylesheet" href="css/admin.css">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Nav.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Header.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Footer.css}">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <title>Dashboard</title>
+  <head th:replace="fragment/admin-head.html :: head"></head>
 </head>
+
 <body>
-<header class='container header__container'
-		th:replace="fragment/header.html :: header"></header>
-		<div class='full__width' th:insert="fragment/nav.html :: navbar">
-	</div>
-	
-<div class="dashboard">
-	 <div class="sidebar">
-        <h2>Dashboard</h2>
-          <ul>
-              <li><a href="#">Dashboard</a></li>
-               <li class="dropdown">
-                    <a href="#" class="dropdown-btn">Users</a>
-                    <div class="dropdown-content">
-                          <a th:href="@{/viewusers}">Manage Users</a>
-                          <a th:href="@{/viewinvestment}">View Investment</a>
-                          <a th:href="@{/viewcollateral}">View Collateral</a>
-                     </div>
-                  </li>
-                  <li class="dropdown">
-                   <a href="#" class="dropdown-btn">Companies</a>
-                     <div class="dropdown-content">
-                         <a th:href="@{/viewcompany}">View Companies</a>
-                         <a th:href="@{/managecompany}">Manage Companies</a>
-                     </div>
-                   </li>
-                   <li><a th:href="@{/refunddata}">Refund Data</a></li>
-                   <li><a th:href="@{/companystatistics}">Companies Statistics</a></li>
-                   <li class="dropdown">
-                   <a href="#" class="dropdown-btn">Reports</a>
-                     <div class="dropdown-content">
-                         <a th:href="@{/reports}">Reports Table</a>
-                         <a th:href="@{/companies/statisticsgraph}">Statistics Graph</a>
-                     </div>
-                   </li>
-               </ul>
-          </div>
-                 
-        <div class="main-content">
-           <!-- Main Content Card -->
-            <div class="card">
-             <h2>Welcome to the Admin Dashboard</h2>
-        <div class="card">
-            <h3>Investment Performance</h3>
-            <canvas id="investment-chart"></canvas>
-         </div>
-      </div>
+
+
+  <div class="dashboard">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
     </div>
-  <div class="content">
-    <div class="sidebar-content">
-      <!-- Sidebar Statistics -->
+
+    <div class="main-content">
+      <!-- Main Content Card -->
       <div class="card">
-        <h3>Statistics</h3>
-            <ul>
-      <li>
-        <span class="stat-label">Users:</span>
-        <span class="stat-value">[[${usercount}]]</span>
-      </li>
-      <li>
-        <span class="stat-label">Companies:</span>
-        <span class="stat-value">[[${companycount}]]</span>
-      </li>
-      <li>
-        <span class="stat-label">Transactions:</span>
-        <span class="stat-value">[[${transactioncount}]]</span>
-      </li>
-    </ul>
+        <h2>Welcome to the Admin Dashboard</h2>
+        <div class="card">
+          <h3>Investment Performance</h3>
+          <canvas id="investment-chart"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="sidebar-content">
+        <!-- Sidebar Statistics -->
+        <div class="card stats">
+          <h3>Statistics</h3>
+          <ul>
+            <li>
+              <span class="stat-label">Users:</span>
+              <span class="stat-value">[[${usercount}]]</span>
+            </li>
+            <li>
+              <span class="stat-label">Companies:</span>
+              <span class="stat-value">[[${companycount}]]</span>
+            </li>
+            <li>
+              <span class="stat-label">Transactions:</span>
+              <span class="stat-value">[[${transactioncount}]]</span>
+            </li>
+          </ul>
+        </div>
+        <br/><br/>
       </div>
     </div>
   </div>
-  </div>
-	   <footer th:insert="fragment/footer.html :: footer"></footer>
 
-   </footer>
-<script input th:inline="javascript">
-	function fundManagement() {
-	   document.getElementById("fundManagement").classList.toggle("show");
-			}
-			
-			
-  // Sample data for the chart
-  const investmentData = {
-    labels: [[${labels}]],
-    datasets: [{
-      label: 'Investment Performance',
-      data: [[${transactionAmounts}]],
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1
-    }]
-  };
+  <script input th:inline="javascript">
+    function fundManagement() {
+      document.getElementById("fundManagement").classList.toggle("show");
+    }
 
-  // Render the chart
-  const ctx = document.getElementById('investment-chart').getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
-    data: investmentData,
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: function (value) {
-              return 'Rs ' + value;
+    // Sample data for the chart
+    const investmentData = {
+      labels: [[${ labels }]],
+      datasets: [{
+        label: 'Investment Performance',
+        data: [[${ transactionAmounts }]],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    };
+
+    // Render the chart
+    const ctx = document.getElementById('investment-chart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: investmentData,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value) {
+                return 'Rs ' + value;
+              }
             }
           }
         }
       }
-    }
-  });
-  
+    });
 
-</script>
+
+  </script>
 
 </body>
+
 </html>

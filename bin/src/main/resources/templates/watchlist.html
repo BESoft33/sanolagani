@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragment/head.html :: headerfiles"></head>
+
+<body>
+  <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+
+  <div class='full__width' th:insert="fragment/nav.html :: navbar"></div>
+
+  <!-- All Companies -->
+  <section class='mostfunded__section'>
+    <div class="container mostfunded__container">
+
+      <h2>Watchlisted Company</h2>
+      <div class="cards row">
+
+        <div class="card " th:each="company : ${companies}">
+          <div th:replace="fragment/company-card.html :: card"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer th:insert="fragment/footer.html :: footer"></footer>
+</body>
+</html>

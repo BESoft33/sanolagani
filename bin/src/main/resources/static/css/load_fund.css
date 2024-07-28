@@ -1,7 +1,7 @@
-.center__dashboard{
+.center__load{
     margin-bottom: 2rem;
 }
-.center__dashboard form{
+.center__load form{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
@@ -15,7 +15,7 @@
 }
 .load_input{
     height: 35px;
-    background: var(--color-light-gray);
+    background: var(--color-background);
     padding: 0 10px;
     font-weight: 400;
     font-size: 15px;

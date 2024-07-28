@@ -1,39 +1,44 @@
-.details{
+.details {
     margin: 30px 0;
 }
-.details__container{
+
+.details__container {
     display: grid;
     grid-template-columns: 2fr 1fr;
     margin: 2rem 0;
 }
+
 /* ================== left container ================= */
-.left__detail-main{
+.left__detail-main {
     border-radius: 8px;
     padding: 30px 0;
     background: var(--color-background);
 }
-.left__detail h5{
+
+.left__detail h5 {
     text-align: center;
     color: var(--color-blue);
     font-size: 28px;
     margin-bottom: 20px;
     text-transform: capitalize;
 }
-.left__detail h2{
+
+.left__detail h2 {
     font-size: 18px;
     margin-bottom: 2rem;
 }
 
-.details__buttons{
+.details__buttons {
     display: flex;
     justify-content: center;
     margin: 2rem;
 }
-.amount{
-    margin:0 1rem;
+
+.amount {
+    margin: 0 1rem;
 }
 
-.detail__input{
+.detail__input {
     height: 2rem;
     border: 0.5px solid gray;
     background: var(--color-background);
@@ -42,129 +47,144 @@
     font-size: 15px;
     border-radius: 3px;
 }
-.detail__amount{
+
+.detail__amount {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 
-.left__detail-bottom{
+.left__detail-bottom {
     margin-top: 3rem;
     font-size: 18px;
 }
 
 /* ====================== right container ==================== */
-.right__detail{
+.right__detail {
     padding: 10px;
     background: var(--color-light-gray);
     border-radius: 10px;
     text-align: center;
     margin-left: 16px;
 }
-.right__detail h2{
+
+.right__detail h2 {
     color: var(--color-blue);
     margin-bottom: 5px;
 }
-.detail__shares{
+
+.detail__shares {
     display: flex;
     justify-content: space-between;
 }
-.detail__shares p{
+
+.detail__shares p {
     font-size: 15px;
 }
-.detail__info{
+
+.detail__info {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
     margin-bottom: 1rem;
 }
-.detail__info p{
+
+.detail__info p {
     font-size: 13px;
 }
-.detail__info p a{
+
+.detail__info p a {
     color: #000 !important;
     font-size: 15px;
 }
-.additinoal__info{
+
+.additinoal__info {
     font-size: 13px;
     color: var(--color-blue-variant);
 }
 
-.toggle-list{
+.toggle-list {
     display: none;
 }
 
-.dropdown-entity{
-  background:#efefef;
-  padding: 10px;
-  width: 17rem;
-  margin-top:5px;
-  position: absolute;
-  z-index: 99;
-
+.payment-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    background: #efefef;
 }
-.dropdown{
-    background:#efefef;
+
+.dropdown-entity {
+    background: #efefef;
     padding: 10px;
-    margin-top:5px;
+    width: 17rem;
+    margin-top: 5px;
+    position: absolute;
+    z-index: 99;
+    cursor: pointer;
 }
 
-.dropdown-content{
+
+.dropdown-content {
     width: 100%;
 }
 
-.dropdown-list{
+.dropdown-list {
     width: 100%;
     margin-left: 20px;
-    color:#303030;
+    color: #303030;
     display: block;
 }
-.hide{
+
+.hide {
     display: none;
 }
 
-.dropdown-content:hover{
+.dropdown-content:hover {
     background-color: #303030;
 
 }
-.dropdown-list:hover{
-    color:#f8f8f8;
+
+.dropdown-list:hover {
+    color: #f8f8f8;
 }
 
-.payment-btn-group{
-    display:inline-block;
+.payment-btn-group {
+    display: inline-block;
 }
 
 #payment-options {
-  display: none;
-  background-color: #f8f8f8;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-top: 10px;
-  text-align: center;
-  transition: opacity 0.3s ease;
-  width: 100%;
+    display: none;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 10px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    width: 100%;
 }
 
 #fund-management {
-  cursor: pointer;
-  /* text-decoration: underline; */
-  text-align: center;
-  background: #fafafa;
-  color: #337ab7;
-  margin: 10px;
-  width: 100%;
-  background: #efefef;
+    cursor: pointer;
+    /* text-decoration: underline; */
+    text-align: center;
+    background: #fafafa;
+    color: #337ab7;
+    margin: 10px;
+    width: 100%;
+    background: #efefef;
 
 }
-#fund-management:hover{
+
+#fund-management:hover {
     text-decoration: underline;
 }
 
-.pay{
+.pay {
     width: 130px;
     height: 130px;
     border: transparent;
@@ -174,13 +194,13 @@
 
 }
 
-.pay img{
+.pay img {
     width: inherit;
     height: inherit;
     object-fit: scale-down;
 }
 
-.payment-success-message{
-  background-color:#AEFFD8;
-  color: #285943;
+.payment-success-message {
+    background-color: #AEFFD8;
+    color: #285943;
 }

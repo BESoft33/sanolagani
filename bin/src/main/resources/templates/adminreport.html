@@ -1,58 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<html>
-<head>
-	
-  <title>View Users</title>
-     <link rel="stylesheet" type="text/css" href="css/viewpage.css">
-</head>
-<body>
-	
-  <div class="container">
-    <h1>Admin Report</h1>
-    <table>
-      <tr>
-		<th>User Id</th>
-        <th>User Name</th>
-        <th>User Email</th>
-        <th>Company Id</th>
-        <th>Company Name</th>
-        <th>Share Quantity</th>
-        <th>Share Amount</th>
-        <th>Transaction Date</th>
-         <th>Transaction Type</th>
-        <th>Transaction Token</th>
-        <th>Refundable Date</th>
-        <th>Investment Status</th>
-        
-
-      </tr>
-      <tr th:each="invest: ${invest_list}">
-             <td>[[${invest.getUser().getId()}]]</td>
-             <td>[[${invest.getUser().getFname()}]]</td>
-        	 <td>[[${invest.getUser().getEmail()}]]</td>
-        	 <td>[[${invest.getCompany().getId()}]]</td>
-        	 <td>[[${invest.getCompany().getCompanyname()}]]</td>
-        	 <td>[[${invest.getQuantity()}]]</td>
-        	 <td>[[${invest.getAmount()}]]</td>
-             <td>
-                 <p th:text="${#temporals.format(invest.getTransaction().getTransaction_date_time(), 'yyyy-MM-dd') + ' ' + #temporals.format(invest.getTransaction().getTransaction_date_time(), 'HH:mm:ss')}"></p>
-            </td>   
-            <td>[[${invest.getTransaction().getTransaction_type()}]]</td>
-            <td th:if="${invest.getTransaction().getPayment_token() eq 'collateral'}">
-				[[${invest.getTransaction().getPayment_token()}]]-[[${invest.getTransaction().getUser().getCollateral().getTransaction().getPayment_token()}]]
-			</td>
-			<td th:unless="${invest.getTransaction().getPayment_token() eq 'collateral'}">
-				[[${invest.getTransaction().getPayment_token()}]]
-			</td>
-             <td>
-              <p th:text="${#temporals.format(invest.getRefundableUntil(), 'yyyy-MM-dd') + ' ' + #temporals.format(invest.getRefundableUntil(), 'HH:mm:ss')}"></p>
-            </td>
-             <td>[[${invest.getStatus()}]]</td>
-      </tr>
-      <!-- Add more user rows here -->
-    </table>
-  </div>
-</body>
+  <head>
+    <title>View Users</title>
+    <head th:replace="fragment/admin-head.html :: head"></head>
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="sidebar">
+        <h2>Dashboard</h2>
+        <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
+      </div>
+      <table>
+        <tr>
+          <th>User Id</th>
+          <th>User Name</th>
+          <th>User Email</th>
+          <th>Company Id</th>
+          <th>Company Name</th>
+          <th>Share Quantity</th>
+          <th>Share Amount</th>
+          <th>Transaction Date</th>
+          <th>Transaction Type</th>
+          <th>Transaction Token</th>
+          <th>Refundable Date</th>
+          <th>Investment Status</th>
+        </tr>
+        <tr th:each="invest: ${invest_list}">
+          <td>[[${invest.getUser().getId()}]]</td>
+          <td>[[${invest.getUser().getFname()}]]</td>
+          <td>[[${invest.getUser().getEmail()}]]</td>
+          <td>[[${invest.getCompany().getId()}]]</td>
+          <td>[[${invest.getCompany().getCompanyname()}]]</td>
+          <td>[[${invest.getQuantity()}]]</td>
+          <td>[[${invest.getAmount()}]]</td>
+          <td>
+            <p
+              th:text="${#temporals.format(invest.getTransaction().getTransaction_date_time(), 'yyyy-MM-dd') + ' ' + #temporals.format(invest.getTransaction().getTransaction_date_time(), 'HH:mm:ss')}"
+            ></p>
+          </td>
+          <td>[[${invest.getTransaction().getTransaction_type()}]]</td>
+          <td
+            th:if="${invest.getTransaction().getPayment_token() eq 'collateral'}"
+          >
+            [[${invest.getTransaction().getPayment_token()}]]-[[${invest.getTransaction().getUser().getCollateral().getTransaction().getPayment_token()}]]
+          </td>
+          <td
+            th:unless="${invest.getTransaction().getPayment_token() eq 'collateral'}"
+          >
+            [[${invest.getTransaction().getPayment_token()}]]
+          </td>
+          <td>
+            <p
+              th:text="${#temporals.format(invest.getRefundableUntil(), 'yyyy-MM-dd') + ' ' + #temporals.format(invest.getRefundableUntil(), 'HH:mm:ss')}"
+            ></p>
+          </td>
+          <td>[[${invest.getStatus()}]]</td>
+        </tr>
+        <!-- Add more user rows here -->
+      </table>
+    </div>
+  </body>
 </html>

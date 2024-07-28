@@ -1,57 +1,77 @@
-<html xmlns:th="http://www.thymeleaf.org">
+
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sanolagani</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanolagani</title>
 
-  <head th:replace="fragment/head.html :: headerfiles"></head>
-  <link rel="stylesheet" href="css/diversificationgraph.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    <head th:replace="fragment/head.html :: headerfiles"></head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+    <!-- <link rel="stylesheet" th:href="@{/css/diversificationgraph.css}">     -->
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-  <header class='container header__container' th:replace="fragment/header.html :: header"></header>
-  <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
-  <h1>Welcome, [[${user}]]</h1>
-  <div class="left__dashboard" style="margin-bottom: 10px;">
-    <div class="turnover board" style="display: flex; width: 70%; justify-content:space-between;">
-      <div style="display:flex; flex-direction:column; justify-content:flex-start; padding-top:1rem; margin-left:5px;">
-        <h3 style="font-size: 1.25rem;"> Diversification Level</h3>
-        <span style="font-size:12px;">
-          Higher Diversification Level means the portfolio is diversified in multiple sectors.
-          High is considered better and less risky.
-        </span>
-      </div>
-      <div style="padding:5px; margin:0px; min-width:fit-content;">
-        <h2 style="color:#118ab2; font-size: 3rem;">[[${ diversificationlevel }]]/</h2>
-        <h4 style="color:#073b4c; font-size: 1.75rem; padding-top:2rem;">10</h4>
-      </div>
-      <div class="chart-container" style="padding-top: 1rem; height: 120px; margin-left:20px;">
-        <canvas id="ruler-chart"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <div class="left__dashboard">
-    <div class="turnover board" style="margin-bottom: 20px; width:70%;">
-      <canvas id="myChart2"></canvas>
-    </div>
-  </div>
+    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
 
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class=" dashboard__container">
+            <div class="left__dashboard board" th:replace="fragment/dashboard.html::left-fragment"> </div>
+            
+            <div class="my-info-center board">
+              <div class="left__dashboard" style="margin-bottom: 10px;">
+                <div class="turnover board" style="display: flex; justify-content:space-between;">
+                  <div class="diversification-text">
+                    <h3 style="font-size: 1.25rem;"> Diversification Level</h3>
+                    <span style="font-size:12px;">
+                      Higher Diversification Level means the portfolio is diversified in multiple sectors.
+                      High is considered better and less risky.
+                    </span>
+                  </div>
+                  <div style="padding:5px; margin:0px; min-width:fit-content;">
+                    <h2 style="color:#118ab2; font-size: 3rem;">[[${ diversificationlevel }]]/</h2>
+                    <h4 style="color:#073b4c; font-size: 1.75rem; padding-top:1.5rem;">10</h4>
+                  </div>
+                  <div class="chart-container" style="padding-top: 1rem; height: 120px; margin-left:20px; width:70%;">
+                    <canvas id="ruler-chart"></canvas>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="left__dashboard">
+                <div class="turnover board" style="margin-bottom: 20px; width:100%;">
+                  <canvas id="myChart2"></canvas>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer>
+        <footer th:insert="fragment/footer.html :: footer"></footer>
 
+    </footer>
+    <!-- Fund Management Dropdown Script -->
     <script input th:inline="javascript">
       const activeValue = [[${ diversificationlevel }]]; // Replace with the active value received from Spring Boot
 
       const chartData = {
-        labels: Array.from({ length: 10 }, (_, i) => i + 1),
+        labels: Array.from({ length: 11 }, (_, i) => i),
         datasets: [
           {
-            data: Array.from({ length: 10 }, (_, i) => i + 1 === activeValue ? 1 : null),
+            data: Array.from({ length: 11 }, (_, i) => i === activeValue ? 1 : null),
             pointStyle: 'triangle',
             borderColor: 'black',
             borderWidth: 1,
@@ -139,8 +159,6 @@
 
           }
       });
-	
-
     </script>
 </body>
 

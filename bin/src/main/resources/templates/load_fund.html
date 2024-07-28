@@ -5,40 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    	<link rel="stylesheet" href="css/load_fund.css">
+    <link rel="stylesheet" href="css/load_fund.css">
 
     <title>Sanolagani</title>
+
     <head th:replace="fragment/head.html :: headerfiles"></head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
- 
+
 </head>
 
 <body>
 
- <header class='container header__container' th:replace="fragment/header.html :: header"></header>
-	<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
     <!-- Dashboard -->
     <section class="dashboard">
         <div class=" dashboard__container">
             <!-- left dashboard -->
-            <div class="left__dashboard board">
-                <div><a href="#">Sanolagani Dashboard</a></div>
-                <div><a href="#">My Information</a></div>
-                     <div><a href="#">My Investment</a></div>
-                <div class="dropdown">
-                    <button onclick="fundManagement()" class="drop-btn">Fund Management</button>
-                    <div id="fundManagement" class="fundManagementContent">
-                        <a href=""><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral Management</a>
-						<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
-						<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
-						</div>
-                </div>
+            <div class="left__dashboard board" th:replace="fragment/dashboard.html::left-fragment">
             </div>
             <!-- center dashboard -->
-            <div class="center__dashboard board">
+            <div class="center__load board">
                 <form action="#">
                     <div class="bank_row">
                         <label class="load-title" for="bank">BANK <span style="color: red">*</span></label>
@@ -57,17 +47,14 @@
                     </div>
                     <div class="bank_row">
                         <label class="load-title" for="amount">AMOUNT <span style="color: red">*</span></label>
-                        <input id="paymentAmount" class="load_input" type="number" min="1" oninput="validity.valid||(value='')"
+                        <input id="total" class="load_input" type="number" min="1" oninput="validity.valid||(value='')"
                             required>
                     </div>
-                    <input type="hidden" id="companyId" name="companyId" value=0>
-                    <div class="bank_row">
-                        <label class="load-title" for="remarks">REMARKS <span style="color: red">*</span></label>
-                        <input class="load_input" id="remarks" type="text" name="remarks" required>
-                    </div>
+                    <input type="hidden" id="company-id" name="companyId" value=0>
+                   
                     <div>
-                        <input type="button" class="btn" id="payment-button" value="continue"></input>
-                        <button type="reset" class="btn btn-danger">Reset</button>
+                        <input type="button" class="btn btn-primary" id="payment-button" value="continue"></input>
+                        <button type="reset" class="btn">Reset</button>
                     </div>
                 </form>
 
@@ -78,36 +65,30 @@
                 <!-- total collateral -->
                 <div class="load board">
                     <div>
-                        <p class="collateral-title">NPR &nbsp;<span>0.0</span></p>
+                        <p class="collateral-title">NPR &nbsp;<span>[[${totalcollateralamount}]]</span></p>
                         <p class="collateral-sub-tile">Total Collateral</p>
                     </div>
                 </div>
-                <!-- total collateral -->
-                <div class="load board">
-                    <div>
-                        <p class="collateral-title">NPR &nbsp;<span>0.0</span></p>
-                        <p class="collateral-sub-tile">Available Collateral</p>
-                    </div>
-                </div>
+             
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-<footer>
-		<footer th:insert="fragment/footer.html :: footer">
+    <footer th:insert="fragment/footer.html :: footer"></footer>
 
-		</footer>
 
-    <!-- Fund Management Dropdown Script -->
-    <script>
-        function fundManagement() {
-            document.getElementById("fundManagement").classList.toggle("show");
-        }
 
-    </script>
+        <!-- Fund Management Dropdown Script -->
+        <script>
+            function manageFund() {
+                document.getElementById("fundManagement").classList.toggle("show");
+            }
+
+        </script>
 </body>
 <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script th:src="@{/js/payment.js}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script th:src="@{/js/payment.js}"></script>
+
 </html>

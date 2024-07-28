@@ -1,190 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sanolagani</title>
-     <head th:replace="fragment/head.html :: headerfiles"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanolagani</title>
 
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-       
-    </head>
+    <head th:replace="fragment/head.html :: headerfiles"></head>
 
-    <body>
-<header class='container header__container' th:replace="fragment/header.html :: header"></header>
-<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
 
-	<!-- Dashboard -->
-	<section class="dashboard">
-		<div class=" dashboard__container">
-			<div class="left__dashboard board">
-				<div>
-					<p><a th:href="@{/riskinfo}">Sanolagani Dashboard</a></p>
-					<p><a th:href="@{/myinfo}">My Information</a></p>
-					<a th:href="@{'/investmenthistory/'}">My Investment</a>
-					<div class="dropdown">
-						<button onclick="fundManagement()" class="drop-btn">Fund Management</button>
-						<div id="fundManagement" class="fundManagementContent">
-							<a th:href="@{'/collateralsummery/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a>
-							<a th:href="@{'/fundhistory/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
-							<a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
-						</div>
-					</div>
-				</div>
-			</div>
-                <!-- center dashboard -->
-                <div class="center__dashboard board">
-                    <div class="center__heading">
-                        <div><h2>My Information</h2></div>
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class=" dashboard__container">
+            <div class="left__dashboard board" th:replace="fragment/dashboard.html::left-fragment"> </div>
+            
+            <div class="my-info-center board">
+                <div class="center__heading">
+                    <div>
+                        <h2>My Information</h2>
                     </div>
-                    <hr>
-                    <!-- profile details -->
-                    <div class="general_detail">
-                        <h2>[[${user.fname}+' '+${user.lname}]]</h2>
-                        <hr>
-                        <div class="general_profile">
-                            <!-- profile details left -->
-                            <div class="general_profile-left">
-                                <div class="personal_detail">
-                                    <h3>Username: </h3>
-                                    <p>[[${user.fname}+'_'+${user.lname}]]</p>
-                                </div>
-                                <div class="personal_detail">
-                                    <h3>Address: </h3>
-                                    <p>[[${user.address}]]</p>
-                                </div>
-                                <div class="personal_detail">
-                                    <h3>Mobile: </h3>
-                                    <p>[[${user.phnum}]]</p>
-                                </div>
-                                <div class="personal_detail">
-                                    <h3>Email: </h3>
-                                    <p>[[${user.email}]]</p>
-                                </div>
-                                 <div class="personal_detail">
-                                    <h3>Role: </h3>
-                                    <p>[[${user.role}]]</p>
-                                </div>
-                            </div>
-                            <!-- profile details right -->
-                            <div class="general_profile-left">
-                                <div class="personal_detail">
-                                    <h3>PAN: </h3>
-                                    <p>[[${user?.getCompany()?.getPan_image_name()?: 'N/A'}]]</p>
-                                </div>
-                                <div class="personal_detail">
-                                    <h3>User ID: </h3>
-                                    <p>[[${user.id}]]</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- collateral details -->
-                    <div class="general_detail">
-                        <h2>Collateral</h2>
-                        <hr>
-                        <div class="general_profile">
-                            <!-- collateral details left -->
-                            <div class="general_profile-left">
-                                <div class="personal_detail">
-                                    <h3>Total Investment: </h3>
-                                    <p>NPR <span>[[${totalInvestment}]]</span></p>
-                                </div>
-                                <div class="personal_detail">
-                                    <h3>Total Collateral: </h3>
-                                    <p>NPR <span>[[${user?.getCollateral()?.getCollateral_amount()?:'N/A'}]]</span></p>
-                                </div>
-                                <div>
-                                    <br>
-                                    <a th:href="@{/loadfund}">Load</a><br>
-				                    <a th:href="@{/refund/collateral}">Refund</a> 
-                                </div>
-                            </div>
-                            <!-- collateral details right -->
-                            <div class="general_profile-left">
-                                <!-- <div class="personal_detail">
-                                    <h3>PAN: </h3>
-                                    <p>Unavailable</p>
-                                </div>
-                                <div class="personal_detail">
-                                    <h3>User ID: </h3>
-                                    <p>20230628</p>
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
                 </div>
-                <!-- right dashborad -->
-                <!-- <div class="right__dashboard">
-                    <div class="turnover board">
-                        <h2>Total Turnover</h2>
-                        <div>
-                            <p>Traded shares</p>
-                            <p>0</p>
+                <hr>
+                <!-- profile details -->
+                <div class="general_detail">
+                    <h2>[[${user.fname}+' '+${user.lname}]]</h2>
+                    <hr>
+                    <div class="general_profile">
+                        <!-- profile details left -->
+                        <div class="general_profile-left">
+                            <div class="personal_detail">
+                                <h3>Username: </h3>
+                                <p>[[${user.fname}+'_'+${user.lname}]]</p>
+                            </div>
+                            <div class="personal_detail">
+                                <h3>Address: </h3>
+                                <p>[[${user.address}]]</p>
+                            </div>
+                            <div class="personal_detail">
+                                <h3>Mobile: </h3>
+                                <p>[[${user.phnum}]]</p>
+                            </div>
+                            <div class="personal_detail">
+                                <h3>Email: </h3>
+                                <p>[[${user.email}]]</p>
+                            </div>
+                            <div class="personal_detail">
+                                <h3>Role: </h3>
+                                <p>[[${user.role}]]</p>
+                            </div>
                         </div>
-                        <div>
-                            <p>Transactions</p>
-                            <p>0</p>
-                        </div>
-                        <div>
-                            <p>Scrips Traded</p>
-                            <p>0</p>
-                        </div>
-                        <div>
-                            <p>Buy Count</p>
-                            <p>0</p>
-                        </div>
-                        <div>
-                            <p>Buy Summary</p>
-                            <p>0</p>
-                        </div>
-                        <div>
-                            <p>Sell Count</p>
-                            <p>0</p>
-                        </div>
-                        <div>
-                            <p>Sell Summary</p>
-                            <p>0</p>
+                        <!-- profile details right -->
+                        <div class="general_profile-left">
+                            <div class="personal_detail">
+                                <h3>PAN: </h3>
+                                <p>[[${user?.getCompany()?.getPan_image_name()?: 'N/A'}]]</p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="collateral__summary board">
-                        <h2 class="">MY COLLATERAL SUMMARY</h2>
-                        <h3 class="bold">Rs. <span>23,707.89</span></h3>
-
-                        <div>
-                            <p>Collateral Utilized</p>
-                            <p>0</p>
+                </div>
+                <hr>
+                <!-- collateral details -->
+                <div class="general_detail">
+                    <h2>Collateral</h2>
+                    <hr>
+                    <div class="general_profile">
+                        <!-- collateral details left -->
+                        <div class="general_profile-left">
+                            <div class="personal_detail">
+                                <h3>Total Investment: </h3>
+                                <p>NPR <span>[[${totalInvestment}]]</span></p>
+                            </div>
+                            <div class="personal_detail">
+                                <h3>Total Collateral: </h3>
+                                <p>NPR <span>[[${user?.getCollateral()?.getCollateral_amount()?:'N/A'}]]</span></p>
+                            </div>
+                            <div>
+                                <br>
+                                <a th:href="@{/user/loadfund}" class="btn btn-primary">Load</a>
+                                <a th:href="@{/user/refund/collateral}" class="btn">Refund</a>
+                            </div>
                         </div>
-                        <div>
-                            <p>Collateral Available</p>
-                            <p>0</p>
-                        </div>
-                        <a href="#" class="load">Load Collateral</a>
                     </div>
-                </div> -->
+                </div>
+                <hr>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Footer -->
-<footer>
-	<footer th:insert="fragment/footer.html :: footer"></footer>
+    <!-- Footer -->
+    <footer>
+        <footer th:insert="fragment/footer.html :: footer"></footer>
 
-</footer>
-        <!-- Fund Management Dropdown Script -->
-        <script>
-            function fundManagement(){
-                document.getElementById("fundManagement").classList.toggle("show");
-            }
-        </script>
-    </body>
+    </footer>
+    <!-- Fund Management Dropdown Script -->
+    <script>
+        function manageFund() {
+            document.getElementById("fundManagement").classList.toggle("show");
+        }
+    </script>
+</body>
 
 </html>

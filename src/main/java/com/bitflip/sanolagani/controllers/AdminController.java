@@ -76,7 +76,7 @@ public class AdminController {
 		return "admindashboard";
 	}
 
-	@GetMapping("admin/viewusers")
+	@GetMapping("/admin/viewusers")
 	public String getAllUsers(Model model) {
 		List<User> user_list = new ArrayList<>();
 		List<User> alluser_list = userrepo.findAll();
@@ -87,7 +87,6 @@ public class AdminController {
 		for (User user : alluser_list) {
 
 			if (user.getRole().equals("USER")) {
-				System.out.println("User exists");
 				user_list.add(user);
 			}
 		}
@@ -121,16 +120,12 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/managecompany")
-
 	public String getunverifiedcompany(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication == null || authentication.getName().equals("anonymousUser")) {
-			List<UnverifiedCompanyDetails> details = admin_service.fetchAll();
-			if (details != null) {
-				model.addAttribute("UnverfiedCompanies", details);
-				return "managecompany";
-			}
+		List<UnverifiedCompanyDetails> details = admin_service.fetchAll();
+		if (details != null) {
+			model.addAttribute("UnverfiedCompanies", details);
 			return "managecompany";
+		
 		} else {
 			return "redirect:/home";
 		}
@@ -140,14 +135,14 @@ public class AdminController {
 	public String deleteUnverifiedData(@PathVariable("id") String ids) {
 		int id = Integer.parseInt(ids);
 		admin_service.deleteData(id);
-		return "redirect:/managecompany";
+		return "redirect:/admin/managecompany";
 	}
 
 	@GetMapping("/admin/managecompany/edit/save/{id}")
 	public String addVerifiedCompany(@PathVariable("id") String ids, Company company, User user) {
 		int id = Integer.parseInt(ids);
 		admin_service.saveVerifiedCompany(id, company, user);
-		return "redirect:/managecompany";
+		return "redirect:/admin/admindashboard";
 	}
 
 	@GetMapping("/admin/viewcompany")
@@ -163,27 +158,15 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/reports")
-
 	public String viewReportDetails(Model model) {
 		List<Investment> invest_list = investmentrepo.findAll();
 		if (invest_list.isEmpty()) {
-			return "reports";
+			return "adminreport";
 		}
 		model.addAttribute("invest_list", invest_list);
 		return "adminreport";
 	}
 
-	@GetMapping("/company/all-articles")
-	public String viewArticles(Model model) {
-		User user = userrepo.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-		Company company = companyrepo.findById(user.getCompany().getId()).get();
-		List<CompanyArticles> article_list = companyarticlesrepo.findByCompanyId(company.getId());
-		if (article_list.isEmpty()) {
-			return "articles";
-		}
-		model.addAttribute("articles", article_list);
-		return "articles";
-	}
 
 	@GetMapping("/admin/refunddata")
 
@@ -249,13 +232,6 @@ public class AdminController {
 		admin_service.getRefundApprove(id,status);
 		return "redirect:/admin/refunddata";
 	}
-	
-	
-	
-
-	
-	
-	
 
 	public static Map<String, Double> aggregateData(List<Transaction> transactions) {
 		Map<String, Double> aggregatedData = new LinkedHashMap<>();

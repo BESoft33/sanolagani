@@ -26,7 +26,7 @@
 				<form th:action="@{/processlogin}" method="post">
 					<input class='input__box' type="email" placeholder='Email' name="email" required /> <input
 						class='input__box' type="password" placeholder='Password' name="password" required /> <input
-						class='btn btn__login' type="submit" value='Log In' required />
+						class='btn btn-primary btn__login' type="submit" value='Log In' required />
 				</form>
 				<h5 class='forgot__password'>
 					<a th:href="@{/forgotpassword}">Forgot Password?</a>
@@ -34,12 +34,7 @@
 			</div>
 		</div>
 	</section>
-
-	<!-- Footer -->
-
-	<footer th:insert="fragment/footer.html :: footer">
-
-	</footer>
+	<footer th:insert="fragment/footer.html :: footer"></footer>
 
 </body>
 

@@ -11,7 +11,7 @@
 	
   <div class="dashboard">
     <div class="sidebar">
-      <h2>Dashboard</h2>
+      <h2>Admin</h2>
       <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
     </div>
     <table>
@@ -54,9 +54,9 @@
                     th:href="@{D:\sanolagani\src\main\resources\images\{pan} (pan=${detail.citizenship_bname}) }"> </a>
             </td>
             <td>
-                <button type="submit" class="btn"
+                <button type="button" class="button positive"
                     th:onclick="|window.location.href='/admin/managecompany/edit/save/${detail.id}'|">Add</button>
-                <button class="btn btn-danger"
+                <button type="button" class="button negative"
                     th:onclick="|window.location.href='/admin/managecompany/edit/${detail.id}'|">Delete</button>
             </td>
         </tr>

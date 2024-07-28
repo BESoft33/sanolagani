@@ -25,29 +25,7 @@
     <section class="dashboard">
         <div class=" dashboard__container">
             <!-- left dashboard -->
-            <div class="left__dashboard board" th:fragment="left-fragment">
-                <div class="dashboard-title-wrap">
-                    <div class="dashboard-title"><a th:href="@{/riskinfo}">Dashboard</a></div>
-                    <div class="dashboard-title"><a th:href="@{/myinfo}">My Information</a></div>
-                    <div class="dashboard-title"><a th:href="@{'/investmenthistory/'}">My Investment</a></div>
-
-                    <div class="dropdown-manage-fund">
-                        <button onclick="manageFund()" class="drop-btn">
-                            Manage Fund
-                            <span>&nbsp;v&nbsp;</span>
-                        </button>
-                        <div id="fundManagement" class="fundManagementContent">
-                            <div> <a th:href="@{'/collateralsummery/'+${id}+'/'}"><i
-                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a></div>
-
-                            <div><a th:href="@{'/fundhistory/'+${id}+'/'}"><i
-                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
-                            </div>
-                            <div><a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="left__dashboard board" th:replace="fragment/dashboard.html::left-fragment">
             </div>
             <!-- center dashboard -->
             <div class="center__load board">
@@ -73,10 +51,7 @@
                             required>
                     </div>
                     <input type="hidden" id="company-id" name="companyId" value=0>
-                    <div class="bank_row">
-                        <label class="load-title" for="remarks">REMARKS <span style="color: red">*</span></label>
-                        <input class="load_input" id="remarks" type="text" name="remarks" required>
-                    </div>
+                   <div></div>
                     <div>
                         <input type="button" class="btn btn-primary" id="payment-button" value="continue"></input>
                         <button type="reset" class="btn">Reset</button>

@@ -10,7 +10,7 @@
             background-color: #f5f5f5;
             border: 1px solid #ddd;
             padding: 10px;
-            max-width: 300px;
+            width: 60%;
             margin: 20px auto;
         }
         
@@ -50,14 +50,22 @@
             font-size: 12px;
         }
     </style>
+    <link rel="stylesheet" th:href="@{/css/companydashboard.css}">
 </head>
 <body>
-    <div class="notification-container">
-        <div class="notification" th:each="notification,iterStat: ${notificationlist}">
-            <div class="notification-title">Notification [[${iterStat.count}]]</div>
-            <div class="notification-content">[[${notification.message}]],at [[${#temporals.format(notification.createdAt, 'yyyy-MM-dd') + ' ' + #temporals.format(notification.createdAt, 'HH:mm:ss')}]]</div>
-           <div class="notification-timestamp">[[${#temporals.format(notification.createdAt, 'hh:mm a')}]]</div>
+    <div class="container">
+        <div th:replace="fragment/company-dashboard.html :: sidebar"></div>
+    
+        <div class="notification-container">
+            
+            <div class="notification" th:each="notification,iterStat: ${notificationlist}">
+                <h2 class="notification-title">Notification [[${iterStat.count}]]</h2>
+                <div class="notification-content">[[${notification.message}]],at [[${#temporals.format(notification.createdAt, 'yyyy-MM-dd') + ' ' + #temporals.format(notification.createdAt, 'HH:mm:ss')}]]</div>
+                <div class="notification-timestamp">[[${#temporals.format(notification.createdAt, 'hh:mm a')}]]</div>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+

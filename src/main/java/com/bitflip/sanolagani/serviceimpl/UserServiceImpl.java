@@ -69,10 +69,12 @@ public class UserServiceImpl implements UserService {
 		List<User> userlist = userrepo.findAll();
 		for(User user:userlist) {
 			if(result && user.getEmail().equals(email)) {
-				emailpwdmap.put(email, user.getPassword());
 				 this.encode_password=AdminServiceImpl.encodePassword(password);
-				user.setPassword(encode_password);
-				userrepo.save(user);	        
+				 user.setPassword(encode_password);
+				 if(user.getRole().equals("COMPANY")) {
+					user.getCompany().setPwd_change("true");
+				 }
+				  userrepo.save(user);	        
 				email_service.sendChangePasswordMail(email);
 			
 			}
@@ -80,12 +82,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
-	public void saveOldUser(String email,String password) {
-	     User user = userrepo.findByEmail(email);
-	     user.setPassword(password);
-	     userrepo.save(user);
-	     System.out.println("password-"+password);
-	}
 
 	public List<Transaction> getCollateralSummery(int id) {
           List<Transaction> transaction_list = new ArrayList<>();
@@ -123,7 +119,6 @@ public class UserServiceImpl implements UserService {
 	public boolean processRefundRequest(int id, RefundRequestData refundrequest, User user) {
 		LocalDateTime datetime = LocalDateTime.now(); 
 		Investment investment = invest_repo.getReferenceById(id);
-		
 		if(datetime.isBefore(investment.getRefundableUntil())) {
 			refundrequest.setCompany(investment.getCompany());
 			refundrequest.setAmount(investment.getAmount());
@@ -133,7 +128,7 @@ public class UserServiceImpl implements UserService {
 			List<Transaction> transactionlist = transaction_repo.findAll();
 			for(Transaction transaction:transactionlist) {
 				if(transaction.getId()==investment.getTransaction().getId()) {
-					refundrequest.setTransaction(transaction);
+						refundrequest.setTransaction(transaction);
 				}
 			}
 			refund_repo.save(refundrequest);
@@ -157,11 +152,11 @@ public class UserServiceImpl implements UserService {
 		
 		Collateral collateral = user.getCollateral();
 		if(collateral.getCollateral_amount()>=amount) {
-		 double amounts = collateral.getCollateral_amount()-amount;
-		 collateral.setCollateral_amount(amounts);
-		 collateral_repo.save(collateral);
-		 saveRefundRequest(refundrequest,amount,user,collateral);
-		 return true;
+			double amounts = collateral.getCollateral_amount()-amount;
+			collateral.setCollateral_amount(amounts);
+			collateral_repo.save(collateral);
+			saveRefundRequest(refundrequest,amount,user,collateral);
+			return true;
 		}
 		
 		
@@ -171,6 +166,22 @@ public class UserServiceImpl implements UserService {
 
 	public void saveRefundRequest(RefundRequestData refundrequest,double amount,User user,Collateral collateral) {
 		Transaction transaction = collateral.getTransaction();
+		RefundRequestData refunddatas = new  RefundRequestData();
+		List<RefundRequestData> refunddatalist = refund_repo.findAll();
+        boolean result = false;
+			for(RefundRequestData refunddata: refunddatalist) {
+				if(refunddata.getTransaction().getId()==transaction.getId()) {
+					result = true;
+					refunddatas=refunddata;
+					break;
+				}
+			}
+			if(result) {
+				double amounts = refunddatas.getAmount();
+				refunddatas.setAmount(amount+amounts);
+				refund_repo.save(refunddatas);
+			}else {
+		
 		LocalDateTime datetime = LocalDateTime.now(); 
 		refundrequest.setAmount(amount);
 		refundrequest.setCompany(null);
@@ -179,7 +190,7 @@ public class UserServiceImpl implements UserService {
 		refundrequest.setTransaction(transaction);
 		refundrequest.setRefund_date_time(datetime);
 		refund_repo.save(refundrequest);
-		
+			}
 	}
 
 	

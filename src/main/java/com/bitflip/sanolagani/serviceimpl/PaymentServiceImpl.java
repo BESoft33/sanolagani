@@ -117,13 +117,12 @@ public class PaymentServiceImpl implements PaymentService {
 			                           String remarks,User user,Investment investment,
 			                           Notification notification) {
 		
-		String remark=remarks;
 		Company company = company_repo.getReferenceById(companyid);
 	
 			LocalDateTime dateTime = LocalDateTime.now();
 			double pricepershare = company.getPrice_per_share();
-			int quantity = (int) ((amounts/1.02)/pricepershare);
-			double savingamount = amounts/1.02;
+			double savingamount = Math.round(amounts/1.02);
+			int quantity = (int) (savingamount/pricepershare);
 			investment.setAmount(savingamount);
 			investment.setQuantity(quantity);
 			investment.setUser(user);
@@ -133,8 +132,8 @@ public class PaymentServiceImpl implements PaymentService {
 			investment.setTransaction(transaction);
 			invest_repo.save(investment);
 			String message = "User: "+user.getFname()+" has invested in your company having company name: "
-					          +company.getCompanyname()+", for a quantity: "
-					          +quantity+" share unit,of amount Rs: "+quantity*company.getPrice_per_share();
+					        +company.getCompanyname()+", for a quantity: "
+					        +quantity+" share unit,of amount Rs: "+quantity*company.getPrice_per_share();
 			notificationservice.saveNotification(message, notification,user.getId(),company.getId());
 			
 			
@@ -147,12 +146,11 @@ public class PaymentServiceImpl implements PaymentService {
 		List <Collateral> collaterallist = collateral_repo.findAll();
 		System.out.println(collaterallist);
 		if(collaterallist.isEmpty()) {
-			System.out.println("inside null");
-			 collateral.setUser(user);
-	         collateral.setCollateral_amount(amount);
-	         collateral.setRemarks(remarks);
-	         collateral.setTransaction(transaction);
-	         collateral_repo.save(collateral);
+			collateral.setUser(user);
+			collateral.setCollateral_amount(amount);
+			collateral.setRemarks(remarks);
+			collateral.setTransaction(transaction);
+			collateral_repo.save(collateral);
 		}else {
 			Collateral collaterals = user.getCollateral();
 		     if(collaterals!=null) {

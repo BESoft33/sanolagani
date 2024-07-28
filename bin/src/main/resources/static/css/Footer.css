@@ -1,11 +1,11 @@
-footer{
-    background: var(--color-bg);
+footer {
+    background: #303030;
+    color: #fff;
 }
-.footer__container{
+.footer__container {
     display: grid;
     grid-template-columns: 2.5fr 2fr 2fr 1fr;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    padding: 45px 0;
 }
 .first h5{
     text-transform: capitalize;
@@ -18,4 +18,10 @@ footer{
 }
 .about__link:hover{
     margin-left: .5rem;
+}
+.footer-logo{
+    color: #fff !important;
+}
+.second h2, .third h2, .fourth h2{
+    color: #f3f3f3 !important;
 }

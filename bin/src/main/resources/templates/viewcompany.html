@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+      <title>View Company</title>
+      <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}" />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        th:href="@{/css/admindashboard.css}"
+      />
+    </head>
+    <body>
+      <div class="dashboard">
+        <div class="sidebar">
+          <h2>Dashboard</h2>
+          <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
+        </div>
+        <table>
+          <tr>
+            <th>Company Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Sector</th>
+            <th>Website Url</th>
+            <th>Raised Capital</th>
+            <th>Per Share Price</th>
+            <th>Time Span</th>
+          </tr>
+          <tr th:each="company: ${company_list}">
+            <td>[[${company.companyname}]]</td>
+            <td>[[${company.getUser().getAddress}]]</td>
+            <td>[[${company?.getUser()?.getPhnum()?:'N/A'}]]</td>
+            <td>[[${company.sector}]]</td>
+            <td>[[${company.websiteurl}]]</td>
+            <td>[[${company.previouslyraisedcapital}]]</td>
+            <td>[[${company.price_per_share}]]</td>
+            <td>[[${company.timespanforraisingcapital}]]</td>
+          </tr>
+          <!-- Add more user rows here -->
+        </table>
+      </div>
+    </body>
+  </html>
 
-<html>
-<head>
-	
-  <title>View Users</title>
-     <link rel="stylesheet" type="text/css" href="css/viewpage.css">
-</head>
-<body>
-	
-  <div class="container">
-    <h1>View Company</h1>
-    <table>
-      <tr>
-        <th>Company Name</th>
-        <th>Address</th>
-        <th>Phone Number</th>
-        <th>Sector</th>
-        <th>Website Url</th>
-        <th>Raised Capital</th>
-        <th>Per Share Price</th>
-        <th>Time Span</th>
-        <th>Role</th>
-
-      </tr>
-      <tr th:each="company: ${company_list}">
-             <td>[[${company.companyname}]]</td>
-             <td>[[${company.getUser().getAddress}]]</td>
-        	 <td>[[${company.phnum}]]</td>
-        	 <td>[[${company.sector}]]</td>
-        	 <td>[[${company.websiteurl}]]</td>
-        	 <td>[[${company.previouslyraisedcapital}]]</td>
-        	 <td>[[${company.price_per_share}]]</td>
-        	 <td>[[${company.timespanforraisingcapital}]]</td>
-             <td>[[${company.role}]]</td>
-        	
-      </tr>
-      <!-- Add more user rows here -->
-    </table>
-  </div>
-</body>
 </html>

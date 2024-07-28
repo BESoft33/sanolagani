@@ -1,147 +1,108 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	
-     <meta charset="UTF-8">
-     <title>Dashboard</title>
-     <link rel="stylesheet" th:href="@{/css/admindashboard.css}">
-     <link rel="stylesheet" th:href="@{css/admin.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Nav.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Header.css}">
-     <link rel="stylesheet" type="text/css" th:href="@{/css/Footer.css}">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-       <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-
-
+  <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admindashboard.css}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
+
 <body>
-<header class='container header__container'
-		th:replace="fragment/header.html :: header"></header>
-		<div class='full__width' th:insert="fragment/nav.html :: navbar">
-	</div>
-	
-<div class="dashboard">
-	 <div class="sidebar">
-        <h2>Dashboard</h2>
-          <ul>
-              <li><a href="#">Dashboard</a></li>
-               <li class="dropdown">
-                    <a href="#" class="dropdown-btn">Users</a>
-                    <div class="dropdown-content">
-                          <a th:href="@{/viewusers}">Manage Users</a>
-                          <a th:href="@{/viewinvestment}">View Investment</a>
-                          <a th:href="@{/viewcollateral}">View Collateral</a>
-                     </div>
-                  </li>
-                  <li class="dropdown">
-                   <a href="#" class="dropdown-btn">Companies</a>
-                     <div class="dropdown-content">
-                         <a th:href="@{/viewcompany}">View Companies</a>
-                         <a th:href="@{/managecompany}">Manage Companies</a>
-                     </div>
-                   </li>
-                   <li><a th:href="@{/refunddata}">Refund Data</a></li>
-                   <li><a th:href="@{/companystatistics}">Companies Statistics</a></li>
-                   <li class="dropdown">
-                   <a href="#" class="dropdown-btn">Reports</a>
-                     <div class="dropdown-content">
-                         <a th:href="@{/reports}">Reports Table</a>
-                         
-                     </div>
-                   </li>
-               </ul>
-          </div>
-                 
-        <div class="main-content">
-           <!-- Main Content Card -->
+
+  <div class="dashboard">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
+    </div>
+
+    <div class="main-content">
+      <!-- Main Content Card -->
+      <div class="card">
+        <h2>Welcome to the Admin Dashboard</h2>
         <div class="card">
-             <h2>Welcome to the Admin Dashboard</h2>
-        <div class="card">
-            <h3>Company Statistics</h3>
-               <canvas id="combinedChart"></canvas>
-         </div>
+          <h3>Company Statistics</h3>
+          <canvas id="combinedChart"></canvas>
+        </div>
       </div>
     </div>
   </div>
-	<footer th:insert="fragment/footer.html :: footer"></footer>
 
-   </footer>
-<script input th:inline="javascript">
-	var chartData = {
-  labels: [[${companyname_list}]],
-  datasets: [
-    {
-      label: 'Total Raised Share',
-      backgroundColor: 'rgba(75, 192, 192, 0.5)',
-      data: [[${total_raised_share}]]
-    },
-    {
-      label: 'Till Date Applied Share',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      data: [[${total_applied_share}]]
-    },
-    {
-      label: 'Total Capital to be Raised',
-      borderColor: 'rgba(255, 206, 86, 1)',
-      data: [[${total_capital_offer}]],
-      fill: false,
-      type: 'line',
-      yAxisID: 'amount-axis'
-    },
-    {
-      label: 'Till Date Raised Amount',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      data: [[${total_capital_raised}]],
-      fill: false,
-      type: 'line',
-      yAxisID: 'amount-axis'
-    }
-  ]
-};
+  <script input th:inline="javascript">
+    var chartData = {
+      labels: [[${ companyname_list }]],
+      datasets: [
+        {
+          label: 'Total Raised Share',
+          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+          data: [[${ total_raised_share }]]
+        },
+        {
+          label: 'Till Date Applied Share',
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          data: [[${ total_applied_share }]]
+        },
+        {
+          label: 'Total Capital to be Raised',
+          borderColor: 'rgba(255, 206, 86, 1)',
+          data: [[${ total_capital_offer }]],
+          fill: false,
+          type: 'line',
+          yAxisID: 'amount-axis'
+        },
+        {
+          label: 'Till Date Raised Amount',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          data: [[${ total_capital_raised }]],
+          fill: false,
+          type: 'line',
+          yAxisID: 'amount-axis'
+        }
+      ]
+    };
 
-var options = {
-  scales: {
-    y: {
-      beginAtZero: true,
-      title: {
-        display: true,
-        text: 'Number of Shares'
-      }
-    },
-    'amount-axis': {
-     // beginAtZero: true,
-     // position: 'right',
-     // title: {
-      //  display: true,
-       // text: 'Amount'
-     // }
-      display: false
-    }
-  },
-  plugins: {
-    datalabels: {
-      display: function(context) {
-        // Show data labels only for bar datasets
-        return context.dataset.type === 'bar';
+    var options = {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Number of Shares'
+          }
+        },
+        'amount-axis': {
+          // beginAtZero: true,
+          // position: 'right',
+          // title: {
+          //  display: true,
+          // text: 'Amount'
+          // }
+          display: false
+        }
       },
-      anchor: 'end',
-      align: 'end',
-      formatter: function(value) {
-        // Format the data labels as needed
-        return value.toString();
+      plugins: {
+        datalabels: {
+          display: function (context) {
+            // Show data labels only for bar datasets
+            return context.dataset.type === 'bar';
+          },
+          anchor: 'end',
+          align: 'end',
+          formatter: function (value) {
+            // Format the data labels as needed
+            return value.toString();
+          }
+        }
       }
-    }
-  }
-};
+    };
 
-var ctx = document.getElementById('combinedChart').getContext('2d');
-new Chart(ctx, {
-  type: 'bar',
-  data: chartData,
-  options: options
-});
-</script>
+    var ctx = document.getElementById('combinedChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: chartData,
+      options: options
+    });
+  </script>
 </body>
+
 </html>

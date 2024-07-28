@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "board_members")
@@ -22,6 +23,14 @@ public class BoardMembers {
     @Column(name = "first_name")
     private String firstName;
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     @Column(name = "middle_name")
     private String middleName;
 
@@ -31,11 +40,9 @@ public class BoardMembers {
     @Column(name="position")
     private String position;
 
-    @ManyToMany()
-    @JoinTable(name = "company_board_members",
-            joinColumns = @JoinColumn(name = "board_members"),
-            inverseJoinColumns = @JoinColumn(name = "company"))
-    private Set<Company> companies;
+    @ManyToOne()
+    @JoinColumn(name = "company")
+    private Company company;
 
     public long getId() {
         return id;
@@ -45,13 +52,6 @@ public class BoardMembers {
         this.id = id;
     }
 
-    public void setCompanies(Set<Company> companies) {
-        this.companies = companies;
-    }
-
-    public Set<Company> getCompanies() {
-        return companies;
-    }
 
     public String getFirstName() {
         return firstName;

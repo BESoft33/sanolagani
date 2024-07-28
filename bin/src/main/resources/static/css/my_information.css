@@ -1,9 +1,6 @@
 /* main */
-.my__information__container{
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    gap: 1rem;
-    padding: 0 1rem;
+.my-info-center{
+    
 }
 /* right side */
 .center__heading{

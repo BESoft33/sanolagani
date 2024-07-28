@@ -37,7 +37,7 @@ public class SentimentPreprocessor {
 	public SentimentPreprocessor() {
 
 		Properties props = new Properties();
-		props.setProperty("annotators", "tokenize, ssplit,pos, lemma, parse, sentiment");
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse, sentiment");
 		this.pipeline = new StanfordCoreNLP(props);
 
 	}
@@ -48,14 +48,14 @@ public class SentimentPreprocessor {
 		List<Feedback> feedbacks = f_repo.findAll();
 		for(Feedback feedback: feedbacks) {
 			int id = feedback.getCompany().getId();
-			Company company = c_repo.getById(id);
+			Company company = c_repo.getReferenceById(id);
 			companies.add(company);
 		}
 
 		Map<Company, Double> sentimentScores = calculateSentimentScores(companies, feedbacks);
-
 		// Filter companies with good sentiment scores
 		List<Company> companiesWithGoodSentiment = filterCompaniesWithGoodSentiment(sentimentScores);
+        System.out.println(companiesWithGoodSentiment);
 
 
 		return companiesWithGoodSentiment;
@@ -64,10 +64,10 @@ public class SentimentPreprocessor {
 
 	public Map<Company, Double> calculateSentimentScores(List<Company> companies, List<Feedback> feedbacks) {
 		Map<Company, Double> sentimentScores = new HashMap<>();
+			double totalScore = 0.0;
 
 		// Iterate over each company
 		for (Company company : companies) {
-			double totalScore = 0.0;
 			int count = 0;
 
 
@@ -76,17 +76,14 @@ public class SentimentPreprocessor {
 				if (feedback.getCompany().getId()== company.getId()) {
 					String text = preprocessText(feedback.getFeedbacktext());
 					double sentimentScore = performSentimentAnalysis(text);
-
 					totalScore += sentimentScore;
 					count++;
 				}
 			}
-
 			double averageScore = (count > 0) ? totalScore / count : 0.0;
 
 			sentimentScores.put(company, averageScore);
 		}
-
 		return sentimentScores;
 	}
 
@@ -97,8 +94,7 @@ public class SentimentPreprocessor {
 		Annotation annotation = new Annotation(feedbackText);
 		pipeline.annotate(annotation);
 		for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
-			sentimentScore = sentence.get(SentimentCoreAnnotations.SentimentClass.class).equalsIgnoreCase("positive") ? 1.0 : -1.0;
-			return sentimentScore;
+			sentimentScore += sentence.get(SentimentCoreAnnotations.SentimentClass.class).equalsIgnoreCase("positive") ? 1.0 : -1.0;
 		}
 		return sentimentScore;
 	}
@@ -155,4 +151,3 @@ public class SentimentPreprocessor {
 		return text;
 	}
 }
-

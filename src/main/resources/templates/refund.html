@@ -8,61 +8,43 @@
     <link rel="stylesheet" href="css/load_fund.css">
 
     <title>Sanolagani</title>
+
     <head th:replace="fragment/head.html :: headerfiles"></head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
- 
+
 </head>
 
 <body>
- <header class='container header__container' th:replace="fragment/header.html :: header"></header>
-	<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
 
 
     <!-- Dashboard -->
- <!-- Dashboard -->
+    <!-- Dashboard -->
     <section class="dashboard">
         <div class=" dashboard__container">
             <!-- left dashboard -->
-            <div class="left__dashboard board" th:fragment="left-fragment">
-                <div class="dashboard-title-wrap">
-                    <div class="dashboard-title"><a th:href="@{/riskinfo}">Dashboard</a></div>
-                    <div class="dashboard-title"><a th:href="@{/myinfo}">My Information</a></div>
-                    <div class="dashboard-title"><a th:href="@{'/investmenthistory/'}">My Investment</a></div>
-
-                    <div class="dropdown-manage-fund">
-                        <button onclick="manageFund()" class="drop-btn">
-                            Manage Fund
-                            <span>&nbsp;v&nbsp;</span>
-                        </button>
-                        <div id="fundManagement" class="fundManagementContent">
-                            <div> <a th:href="@{'/collateralsummery/'+${id}+'/'}"><i
-                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a></div>
-
-                            <div><a th:href="@{'/fundhistory/'+${id}+'/'}"><i
-                                        class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a>
-                            </div>
-                            <div><a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Settlement</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="left__dashboard board" th:replace="fragment/dashboard.html::left-fragment">
             </div>
             <!-- center dashboard -->
-            <div class="center__dashboard board">
-                <form th:action="@{/refundCollateral}" method="post">
+            <div class="center__load board">
+                <form th:action="@{/user/refundCollateral}" method="post">
                     <div class="bank_row">
-                        <label class="load-title" for="account_number">PHONE NUMBER <span style="color: red">*</span></label>
-                        <input class="load_input" type="number" id="account_number" min="0" th:value="${userphone}" oninput="validity.valid||(value='')" readonly required>
+                        <label class="load-title" for="account_number">PHONE NUMBER <span
+                                style="color: red">*</span></label>
+                        <input class="load_input" type="number" id="account_number" min="9" th:value="${userphone}"
+                            oninput="validity.valid||(value='')" readonly required>
                     </div>
                     <div class="bank_row">
                         <label class="load-title" for="refund_amount">AMOUNT <span style="color: red">*</span></label>
-                        <input class="load_input" name="amount" type="number" id="refund_amount" min="1" th:max="${totalcollateralamount}" oninput="validity.valid||(value='')" required>
+                        <input class="load_input" name="amount" type="number" id="refund_amount" min="1"
+                            th:max="${totalcollateralamount}" oninput="validity.valid||(value='')" required>
                     </div>
                     <div>
-                        <button type="submit" class="btn">Continue</button>
-                        <button type="reset" class="btn btn-danger">Reset</button>
+                        <button type="submit" class="btn btn-primary">Continue</button>
+                        <button type="reset" class="btn">Reset</button>
                     </div>
                 </form>
 
@@ -80,18 +62,18 @@
             </div>
         </div>
     </section>
-    <footer>
-        <footer th:insert="fragment/footer.html :: footer"></footer>
-    </footer>
-  
+
+    <footer th:insert="fragment/footer.html :: footer"></footer>
+
+
 
     <!-- Fund Management Dropdown Script -->
     <script>
-            function manageFund() {
-                document.getElementById("fundManagement").classList.toggle("show");
-            }
+        function manageFund() {
+            document.getElementById("fundManagement").classList.toggle("show");
+        }
 
-        </script>
+    </script>
 </body>
 
 </html>

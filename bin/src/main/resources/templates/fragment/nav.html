@@ -3,23 +3,48 @@
 <nav class='container nav__container' th:fragment="navbar">
 	<div class="left">
 		<ul>
-			<li><a href="/">Home</a></li>
-			<li><a href="#">Start Investing</a></li>
-			<li><a th:href="@{/companyregister}">Raise Capital</a></li>
-			<li><a th:href="@{/company/info}">Company</a></li>
-			<li><a href="#">Learn</a></li>
+			<li><a href="/" class="link">Home</a></li>
+			<li><a th:href="@{/user/myinvestment}" class="link">My Investment</a></li>
+			<li><a th:href="@{/companyregister}" class="link">Raise Capital</a></li>
+			<li><a th:href="@{/user/company}" class="link">Company</a></li>
+			<li><a href="#" class="link">Learn</a></li>
 		</ul>
 	</div>
 	<div class="right">
 		<ul>
-			<li sec:authorize="hasRole('ROLE_ANONYMOUS')"><a th:href="@{/login}">Login</a></li>
-			<li sec:authorize="hasRole('ROLE_ANONYMOUS')"><a th:href="@{/register}">Sign Up</a></li>
+			<li sec:authorize="hasRole('ROLE_ANONYMOUS')"><a th:href="@{/login}" class="link">Login</a></li>
+			<li sec:authorize="hasRole('ROLE_ANONYMOUS')"><a th:href="@{/register}" class="link">Sign Up</a></li>
 
-			<li sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')"><a th:href="@{/dashboard}">portfolio</a>
+			
+            <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/user/company/mywatchlist}" class="link">My Watchlist</a></li>
+
+			<li sec:authorize="hasRole('ROLE_USER')"
+				style="position: relative; cursor: pointer; color:#fff; font-size: 18px; user-select: none;" onclick="document.querySelector('.sub-menu-wrap').classList.toggle('active-menu')"> Profile
 			</li>
-			<li sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_COMPANY')"><a th:href="@{/logout}">logout</a></li>
-			<li sec>
-			</li>
+			<!-- css files are on style.css -->
+			<div class="sub-menu-wrap">
+				<div class="sub-menu">
+					<div class="sub-menu-user-info">
+						<h2 sec:authorize="hasRole('ROLE_USER')">[[${#authentication.principal.getFname}]][[${#authentication.principal.getLname}]]</h2>
+					</div>
+					<hr>
+					<a th:href="@{/user/dashboard}" class="sub-menu-link">
+						<p>Portfolio</p>
+					</a>
+					<a th:href="@{/user/edit/details}" class="sub-menu-link">
+						<p>Edit profile</p>
+					</a>
+					<a th:href="@{/change_password}" class="sub-menu-link">
+						<p>Change Password</p>
+					</a>
+					<a href="#" class="sub-menu-link">
+						<p>Help & Support</p>
+					</a>
+					<a th:href="@{/logout}" class="sub-menu-link">
+						<p>Logout</p>
+					</a>
+				</div>
+			</div>
 		</ul>
 	</div>
 </nav>

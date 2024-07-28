@@ -13,10 +13,10 @@
     <section>
         <div class="container login__container">
             <div class="login__left">
-                <img th:src="@{'/photos/register.png'}" alt="image" />
+                <img th:src="@{'/images/sanolagani logo.png'}" alt="image" />
             </div>
             <div class="login__right">
-               <!--<span id="error-msg"></span> --> 
+                <!--<span id="error-msg"></span> --> 
                 <div class="heading__background">
                     <a href="user_login.html">
                         <h2>Login</h2>
@@ -25,95 +25,123 @@
                         <h2>Sign Up</h2>
                     </a>
                 </div>
-                <form th:action="@{/register}" method="post" onsubmit=" registerValidate()">
-                    <input class='input__box' type="text`" placeholder='First Name' name="fname" id="fname"  />
-                    <input class='input__box' type="text" placeholder='Last Name' name="lname" id="lname"  />
-                    <input class='input__box' type="email" placeholder='Email' name="email"  />
-                    <input class='input__box' type="number" placeholder='Mobile Number' name="mobile" id="mobile"  />
+                <p id="error-msg"></p>
+                <form th:action="@{/register}" method="post" id="signup-form">
+                    <input class='input__box' type="text`" placeholder='First Name' name="fname" id="fname" />
+                    <input class='input__box' type="text" placeholder='Last Name' name="lname" id="lname" />
+                    <input class='input__box' type="email" placeholder='Email' name="email" />
+                    <input class='input__box' type="text" placeholder='Mobile Number' name="phnum" id="mobile" />
 
-                    <input class='input__box' type="text`" placeholder='Address' name="address" id="address"  />
+                    <input class='input__box' type="text`" placeholder='Address' name="address" id="address" />
                     <!-- <span id="password-error"> ** password</span> -->
-                    <input class='input__box' type="password" placeholder='Password' id="password" name="password"
-                         />
-                    <input class='input__box' type="password" placeholder='Confirm Password' id="cpassword"
-                         name="c_password"  />
-                    <input class='btn btn-primary btn__login' type="submit" value='Sign Up'  />
-                    <!-- <button class="btn btn__login" type="submit">Signup</button> -->
+                    <input class='input__box' type="password" placeholder='Password' id="password" name="password" />
+                    <input class='input__box' type="password" placeholder='Confirm Password' id="cpassword" name="c_password" />
+                    <span id="message" style="color:red; font-size:12px; padding-top: 0px; background-color: transparent;">&nbsp;</span>
+                    <input class='btn btn-primary btn__login' type="submit" value='Sign Up' id="submitBtn"/>
                 </form>
             </div>
         </div>
     </section>
+    <footer th:insert="fragment/footer.html :: footer"></footer>
 
+    <!-- <script th:src="@{/js/valiate.js}" type="text/javascript"></script> -->
     <script>
+        var signup = document.getElementById("signup-form");
+        var fname = document.getElementById('fname');
+        var lname = document.getElementById('lname');
+        var mobile = document.getElementById('mobile');
+        var address = document.getElementById('address');
+        var password = document.getElementById('password');
+        var cpassword = document.getElementById('cpassword');
+        var submitBtn = document.getElementById("submitBtn");
+        var error = document.getElementById("message");
+
+        cpassword.addEventListener("keyup", ()=>{
+        	console.log(cpassword.value);
+        	matchPassword();
+        });
+
+        function matchPassword() {  
+            error.innerText = "Enter identical password on both fields.";
+            if (password.value === cpassword.value) {
+                error.innerText = " ";
+                submitBtn.disabled = false;
+            }
+            else {
+                submitBtn.disabled = true;
+            }
+        }
+
+        signup.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if(registerValidate()===true){
+                signup.submit();
+            }
+        });
+
         registerValidate = ()=>{
-            let fname = document.getElementById('fname').value;
-            let lname = document.getElementById('lname').value;
-            let mobile = document.getElementById('mobile').value;
-            let address = document.getElementById('address').value;
-            let password = document.getElementById('password').value;
-            let cpassword = document.getElementById('cpassword').value;
+            let pass = password.value;
+            let cpass = cpassword.value;
 
-            let fnamecheck = /^[a-zA-Z ]{3,}$/;
-            let lnamecheck = /^[a-zA-Z]{3,}$/;
-            // let emailcheck = /^[A-Za-z_.]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z]{2,6}$/;
-            let mobilecheck = /^[9]{1}[78]{1}[0-9]{8}$/;
-            let addresscheck = /^[a-zA-Z0-9 ]{3,}$/;
+            let fnamecheck = /^\w{3,}$/;
+            let lnamecheck = /^\w{3,}$/;
+            let mobilecheck = /^9[678]\d{8}$/;
+            let addresscheck = /^[a-zA-Z0-9\s,-]{3,}$/;
             let passwordcheck = /^(?=.*[0-9])(?=.*[!@#$%^*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
-
-            if(fnamecheck.test(fname)){
-                document.getElementById('error-msg').innerHTML = "";
+            
+            document.getElementById('error-msg').innerHTML = " ";
+            if(fnamecheck.test(fname.value)){
+                document.getElementById('error-msg').innerHTML = " ";
             }else{
+            	console.log(fname.value);
+
                 document.getElementById('error-msg').innerHTML = "** Enter valid first name";
                 return false;
             }
 
-            if(lnamecheck.test(lname)){
-                document.getElementById('error-msg').innerHTML = "";
+            if(lnamecheck.test(lname.value)){
+                document.getElementById('error-msg').innerHTML = " ";
             }else{
                 document.getElementById('error-msg').innerHTML = "** Enter valid lastname";
                 return false;
             }
 
-            // if(emailcheck.test(email)){
-            //     document.getElementById('error-msg').innerHTML = "";
-            // }else{
-            //     document.getElementById('error-msg').innerHTML = "** Enter valid email";
-            //     return false;
-            // }
-
-            if(mobilecheck.test(mobile)){
-                document.getElementById('error-msg').innerHTML = "";
+            if(mobilecheck.test(mobile.value)){
+                document.getElementById('error-msg').innerHTML = " ";
             }else{
                 document.getElementById('error-msg').innerHTML = "** Enter valid mobile number";
                 return false;
             }
 
-            if(addresscheck.test(address)){
-                document.getElementById('error-msg').innerHTML = "";
+            if(addresscheck.test(address.value)){
+                document.getElementById('error-msg').innerHTML = " ";
             }else{
                 document.getElementById('error-msg').innerHTML = "** Enter valid address";
                 return false;
             }
 
-            if(passwordcheck.test(password)){
-                document.getElementById('error-msg').innerHTML = "";
-            }else{
-                document.getElementById('error-msg').innerHTML = "** Enter valid password";
+            if(pass.length < 8){
+                document.getElementById('error-msg').innerHTML = "** Password must be atleast 8 characters";
                 return false;
             }
-            // if(cpassword.match(password)){
-            //     document.getElementById('error-msg').innerHTML = "";
-            // }else{
-            //     document.getElementById('error-msg').innerHTML = "** Password Not Matched.";
-            // }
 
-            if(password != cpassword){
+            if(passwordcheck.test(pass)){
+                document.getElementById('error-msg').innerHTML = " ";
+            }else{
+                document.getElementById('error-msg').innerHTML = "** A valid must contain atleast 1 number and 1 special character";
+                return false;
+            }
+
+            if(pass !== cpass){
                 document.getElementById('error-msg').innerHTML = "** Password Not matched";
                 return false;
+            }else{
+            	document.getElementById('error-msg').innerHTML = " ";
             }
-        }
+            
+            return true;
+        };
     </script>
-
     
 </body>
 

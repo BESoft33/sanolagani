@@ -11,7 +11,7 @@
 	<section class="login">
 		<div class="container login__container">
 			<div class="login__left">
-				<img th:src="@{'/images/register.png'}" alt="image" />
+				<img th:src="@{'/images/sanolagani logo.png'}" alt="image" />
 			</div>
 			<div class="login__right">
 				<div th:if="${param.error}" class="alert alert-error text-danger">
@@ -34,6 +34,7 @@
 			</div>
 		</div>
 	</section>
+	<footer th:insert="fragment/footer.html :: footer"></footer>
 
 </body>
 

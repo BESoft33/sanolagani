@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:insert="fragment/head.html :: headerfiles">
-</head>
-<!-- main header -->
-
-<!-- navigation -->
-<header class='container header__container' th:replace="fragment/header.html :: header"></header>
-	<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
-
-<!-- table -->
-<section>
-    <h1>Company Table</h1>
-    <table id="customers">
+<html>
+<head>
+	
+  <title>View Users</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admindashboard.css}"></head>
+<body>
+	
+  <div class="dashboard">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
+    </div>
+    <table>
         <tr>
             <th>company</th>
             <th>phone</th>
@@ -53,17 +55,13 @@
             </td>
             <td>
                 <button type="submit" class="btn"
-                    th:onclick="|window.location.href='/managecompany/edit/save/${detail.id}'|">Add</button>
+                    th:onclick="|window.location.href='/admin/managecompany/edit/save/${detail.id}'|">Add</button>
                 <button class="btn btn-danger"
-                    th:onclick="|window.location.href='/managecompany/edit/${detail.id}'|">Delete</button>
+                    th:onclick="|window.location.href='/admin/managecompany/edit/${detail.id}'|">Delete</button>
             </td>
         </tr>
     </table>
 </section>
-<footer>
-		<footer th:insert="fragment/footer.html :: footer">
-
-		</footer>
 
 </body>
 

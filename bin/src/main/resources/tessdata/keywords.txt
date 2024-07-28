@@ -1,0 +1,6 @@
+profit
+loss
+gain
+assets
+liabilities
+turnover

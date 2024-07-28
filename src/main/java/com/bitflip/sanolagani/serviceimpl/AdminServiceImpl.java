@@ -121,8 +121,11 @@ public class AdminServiceImpl implements AdminService {
 		company_repo.save(company);
 		try {
 			int company_id = transferUploadedFile(company);
+			System.out.println("----------------------------------------------------------------------------------------");
 			System.out.println("file transfered.\n Extracting tables from pdf for company " + company.getId()
 					+ " and company name " + company.getCompanyname() + " .");
+		System.out.println("----------------------------------------------------------------------------------------");
+	
 			tablesFromPDF.extractAllTables(company_repo.getReferenceById(company_id));
 			System.out.println("tables extracted.");
 		} catch (IOException e) {
@@ -228,7 +231,7 @@ public class AdminServiceImpl implements AdminService {
 	public void sendAdminEmail(String email, String plain_password) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo("raayaseetal@gmail.com");
-		message.setSubject("Company Registered Sucessfully");
+		message.setSubject("Admin Registered Sucessfully");
 		message.setText("The authentication details for admin is :" + email
 				+ " password:" + plain_password + ". Regards:seetal raya from sanolagani project");
 		mailSender.send(message);

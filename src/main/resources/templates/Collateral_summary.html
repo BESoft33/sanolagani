@@ -1,48 +1,69 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sanolagani</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanolagani</title>
 
-	<head th:replace="fragment/head.html :: headerfiles"></head>
-	<link rel="stylesheet" href="css/dashboard.css">
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+    <head th:replace="fragment/head.html :: headerfiles"></head>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
-		<div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
- <section>
-    <center><h1 > Collateral summary</h1></center>
-    <table id="customers">
-        <tr>
-            <th>Username</th>
-            <th>amount</th>
-            <th>transfer date</th>
-            <th>token</th>
-            <th>type</th>
+    <header class='container header__container' th:replace="fragment/header.html :: header"></header>
+    <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
+
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class=" dashboard__container">
+            <div class="left__dashboard board" th:replace="fragment/dashboard.html::left-fragment"> </div>
             
-        </tr>
-        <tr th:each="transaction: ${transactionlist}">
-            <td> <a th:text="${name}"></a></td>
-            <td> <a th:text="${transaction.amount}"></a></td>
-            <td>
-              <p th:text="${#temporals.format(transaction.transaction_date_time, 'yyyy-MM-dd') + ' ' + #temporals.format(transaction.transaction_date_time, 'HH:mm:ss')}"></p>
-            </td>
-            <td>
-                <p th:text="${transaction.payment_token}"></p>
-            </td>
-            <td>
-                <p th:text="${transaction.transaction_type}"></p>
-            </td>
-        </tr>
-    </table>
-</section>
+            <div class="my-info-center board">
+                <table id="customers">
+                    <tr>
+                        <th>Username</th>
+                        <th>amount</th>
+                        <th>transfer date</th>
+                        <th>token</th>
+                        <th>type</th>
+                        
+                    </tr>
+                    <tr th:each="transaction: ${transactionlist}">
+                        <td> <a th:text="${name}"></a></td>
+                        <td> <a th:text="${transaction.amount}"></a></td>
+                        <td>
+                        <p th:text="${#temporals.format(transaction.transaction_date_time, 'yyyy-MM-dd') + ' ' + #temporals.format(transaction.transaction_date_time, 'HH:mm:ss')}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${transaction.payment_token}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${transaction.transaction_type}"></p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <footer th:insert="fragment/footer.html :: footer"></footer>
+
+    </footer>
+    <!-- Fund Management Dropdown Script -->
+    <script>
+        function manageFund() {
+            document.getElementById("fundManagement").classList.toggle("show");
+        }
+    </script>
 </body>
 
 </html>
+

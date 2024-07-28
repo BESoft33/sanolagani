@@ -1,0 +1,74 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+.investment-details {
+            width: 800px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+h1 {
+            color: #333333;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+.investment-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #dddddd;
+            padding: 15px 0;
+        }
+
+.investment-item:last-child {
+            border-bottom: none;
+        }
+
+.investment-item-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ffbb33;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+.investment-item-icon i {
+            color: #ffffff;
+            font-size: 24px;
+        }
+
+.investment-item-content {
+            width: 300px;
+        }
+
+.investment-item-title {
+            font-weight: bold;
+            color: #333333;
+            font-size: 18px;
+        }
+
+.investment-item-description {
+            color: #666666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+.investment-item-amount {
+            font-weight: bold;
+            color: #333333;
+            font-size: 18px;
+        }
+
+.investment-item-date {
+            color: #999999;
+            font-size: 14px;
+        }
+
+

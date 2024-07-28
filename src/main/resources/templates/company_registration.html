@@ -48,22 +48,22 @@
 				<div class="register-row">
 					<input class="register_input" type="email" placeholder="Company Email" name="email"
 						th:field="*{email}">
-					<input class="register_input" type="number" placeholder="Company Number" name="phnum"
+					<input class="register_input" type="number" min="0" placeholder="Company Contact Number" name="phnum"
 						th:field="*{phnum}">
 				</div>
 				<div class="register-row">
 					<input class="register_input" type="text" placeholder="Website URL" name="websiteurl" th:field="*{websiteurl}">
-					<input class="register_input" type="number" placeholder="Capital To Raise" name="raisedcapital" th:field="*{raisedcapital}">
+					<input class="register_input" type="number" placeholder="Capital To Raise" min="1" oninput="validity.valid||(value='')" name="raisedcapital" th:field="*{raisedcapital}">
 				</div>
 				<div class="register-row">
 					<input class="register_input" type="text" placeholder=" sector" name="sector" th:field="*{sector}">
-					<input class="register_input" type="number" placeholder=" maximum quantity" name="maximum_quantity">
+					<input class="register_input" type="number" min="1" oninput="validity.valid||(value='')" placeholder=" maximum quantity" name="maximum_quantity">
 				</div>
 
 				<div class="register-row">
-					<input class="register_input" style="margin-left: 65px;" type="text" placeholder="Time Span For Raising Capital" name="timespanforraisingcapital"
+					<input class="register_input" style="margin-left: 65px;" type="text" min="1" oninput="validity.valid||(value='')" placeholder="Time Span For Raising Capital" name="timespanforraisingcapital"
 						   th:field="*{timespanforraisingcapital}">
-					<input class="register_input" type="number" placeholder="Price per Unit" name="price_per_share">
+					<input class="register_input" type="number" min="1" oninput="validity.valid||(value='')" placeholder="Price per Unit" name="price_per_share">
 					<br>
 				</div>
 

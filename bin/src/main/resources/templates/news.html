@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanolagani</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Nav.css">
+    <link rel="stylesheet" href="css/Header.css">
+    <link rel="stylesheet" href="css/Home.css">
+    <link rel="stylesheet" href="css/HowToInvest.css">
+    <link rel="stylesheet" href="css/Footer.css">
+    <link rel="stylesheet" href="css/MostMomentum.css">
+    <link rel="stylesheet" href="css/MostFunded.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/privacy.css">
+    <link rel="stylesheet" href="css/pageNotFound.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+    <!-- main header -->
+    <header class='container header__container'>
+        <div>
+            <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
+        </div>
+        <div class='search'>
+            <form method="get">
+                <input type="search" name="search" placeholder='Search' id="" />
+                <button type="submit" class="search__icon"><i
+                        class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+    </header>
+
+    <!-- navigation -->
+    <div class='full__width'>
+        <nav class='container nav__container'>
+            <div class="left">
+                <ul>
+                    <li><a href="/" class="nav__link">Home</a></li>
+                    <li><a href="#" class="nav__link">Start Investing</a></li>
+                    <li><a href="#" class="nav__link">Raise Capital</a></li>
+                    <li><a href="company_registration.html" class="nav__link">Register Company</a></li>
+                    <li><a href="invest.html" class="nav__link">Invest</a></li>
+                </ul>
+            </div>
+
+            <div class="right">
+                <ul>
+                    <li><a href="user_login.html" class="nav__link">Login</a></li>
+                    <li><a href="user_signup.html" class="nav__link">Sign Up</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class=" my__information__container">
+            <!-- copy paste from other page -->
+            <div class="left__dashboard board">
+                <div><a href="#">Sanolagani Dashboard</a></div>
+                <div><a href="#"><a href="#">My Information</a></a></div>
+
+                <div class="dropdown">
+                    <button onclick="fundManagement()" class="drop-btn">Fund Management</button>
+                    <div id="fundManagement" class="fundManagementContent">
+                        <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Sub Fund Management</a>
+                        <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Sub Fund Management</a>
+                        <a href="#"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Sub Fund Management</a>
+                    </div>
+                </div>
+            </div>
+            <!-- center dashboard -->
+            <div class="center__news board">
+                <div class="center__heading">
+                    <div>
+                        <h2>News</h2>
+                    </div>
+                </div>
+                <hr>
+                <br>
+                <!-- profile details -->
+                <div class="news">
+                    <table class="news-table">
+                        <tr class="news-head">
+                            <th class="news-head-date">DATE</th>
+                            <th class="news-head-event">NEWS</th>
+                        </tr>
+                        <tr class="news-row">
+                            <td class="news-data-date"><a href="#">May 7, 2023<br><img src="./images/voklagyo.png" alt="img" class="doc-img"></td>
+            
+                            <td class="news-data-event"><a href="#">News goes here</a></td>
+                        </tr>
+                        <tr class="news-row">
+                            <td class="news-data-date"><a href="#">May 7, 2023<br><img src="./images/voklagyo.png" alt="img" class="doc-img"></td>
+            
+                            <td class="news-data-event"><a href="#">News goes here</a></td>
+                        </tr>
+                        <tr class="news-row">
+                            <td class="news-data-date"><a href="#">May 7, 2023<br><img src="./images/voklagyo.png" alt="img" class="doc-img"></td>
+            
+                            <td class="news-data-event"><a href="#">News goes here</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer__container">
+            <div class="first">
+                <h1 class='logo'>Sanolagani</h1>
+                <h5>&copy; all rights are reserved 2023</h5>
+            </div>
+            <div class="second">
+                <h2>About Us</h2>
+                <ul class='footer__list'>
+                    <li><a href="#" class='about__link'>Our Team</a></li>
+                    <li><a href="#" class='about__link'>Careers</a></li>
+                    <li><a href="#" class='about__link'>Blog</a></li>
+                </ul>
+            </div>
+            <div class="third">
+                <h2>Wrok Together</h2>
+                <ul class='footer__list'>
+                    <li><a href="#" class='about__link'>Raise Capital</a></li>
+                    <li><a href="#" class='about__link'>Refer a friend</a></li>
+                    <li><a href="#" class='about__link'>Success stories</a></li>
+                    <li><a href="#" class='about__link'>Partnership</a></li>
+                </ul>
+            </div>
+            <div class="fourth">
+                <h2>Need Help</h2>
+                <ul class='footer__list'>
+                    <li><a href="#" class='about__link'>Contact us</a></li>
+                    <li><a href="#" class='about__link'>Need Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fund Management Dropdown Script -->
+    <script>
+        function fundManagement() {
+            document.getElementById("fundManagement").classList.toggle("show");
+        }
+    </script>
+</body>
+
+</html>

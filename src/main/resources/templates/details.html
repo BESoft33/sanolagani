@@ -15,8 +15,6 @@
                     <div class="left__detail-main">
 
                         <h5><span>[[${company.companyname}]]</span> &nbsp; Rs. <span>[[${company.price_per_share}]]</span> per share</h5>
-<!--                        <h2>Bhoklagyo - Feeding the distanced customer with taste.</h2>-->
-<!--                        <span id="company-id" hidden>[[${company.id}]]</span>-->
                         <input type="hidden" id="company-id" name="companyId" th:value="${company.id}">
                         <span id="pps" hidden>[[${company.price_per_share}]]</span>
                         <span id="maxq" hidden>[[${remainingQuantity}]]</span>
@@ -34,7 +32,7 @@
                         </div>
                             <div class="detail__amount">
                                 <span>Amount: Rs.&nbsp;
-                                    <input type="number" class="detail__input"  min="1" oninput="validity.valid||(value='')" name="amount" id="paymentAmount">
+                                    <input type="number" class="detail__input" min="1" name="amount" id="paymentAmount">
                                 </span>
                                 <span id="message" style="color:crimson; background-color: #ff22gg"></span>
 
@@ -43,12 +41,12 @@
                             </div>
                     </div>
 
-                    <div class="dropdown">
+                    <div class="payment-dropdown">
                         <div id="payment-error-message" th:if="${message}">
                             Transaction [[${message}]] !
                         </div>
 
-                        <div id="fund-management">Choose Payment Option</div>
+                        <div id="fund-management" class="payment-dropdown">Choose Payment Option</div>
                         <div id="payment-options" class="pay-button-group">
 
                             <button href="#" value="KHALTI" class="pay" id="payment-button">

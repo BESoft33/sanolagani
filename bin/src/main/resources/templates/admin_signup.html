@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragment/head.html :: headerfiles"></head>
+
+<body>
+    <header class='container header__container'>
+        <div>
+            <h1><a href="/" class='logo hover_none'>Sanolagani</a> </h1>
+        </div>
+    </header>
+    <hr>
+    <section>
+        <div class="container login__container">
+            <div class="login__left">
+                <img th:src="@{'/photos/register.png'}" alt="image" />
+            </div>
+            <div class="login__right">
+               <!--<span id="error-msg"></span> --> 
+                <div class="heading__background">
+                    <a href="user_login.html">
+                        <h2>Login</h2>
+                    </a>
+                    <a href="user_signup.html" class='active'>
+                        <h2>Sign Up</h2>
+                    </a>
+                </div>
+                <form th:action="@{/saveadmin}" method="post" onsubmit=" registerValidate()">
+                    <input class='input__box' type="text`" placeholder='First Name' name="fname" id="fname"  />
+                    <input class='input__box' type="text" placeholder='Last Name' name="lname" id="lname"  />
+                    <input class='input__box' type="email" placeholder='Email' name="email"  />
+                    <input class='input__box' type="number" placeholder='Mobile Number' name="phnum" id="mobile"  />
+
+                    <input class='input__box' type="text`" placeholder='Address' name="address" id="address"  />
+                    <!-- <span id="password-error"> ** password</span> -->
+                    <input class='input__box' type="password" placeholder='Password' id="password" name="password"
+                         />
+                    <input class='input__box' type="password" placeholder='Confirm Password' id="cpassword"
+                         name="c_password"  />
+                    <input class='btn btn-primary btn__login' type="submit" value='Sign Up'  />
+                    <!-- <button class="btn btn__login" type="submit">Signup</button> -->
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+		<footer th:insert="fragment/footer.html :: footer"></footer>
+	</footer>
+
+    <script>
+        registerValidate = ()=>{
+            let fname = document.getElementById('fname').value;
+            let lname = document.getElementById('lname').value;
+            let mobile = document.getElementById('mobile').value;
+            let address = document.getElementById('address').value;
+            let password = document.getElementById('password').value;
+            let cpassword = document.getElementById('cpassword').value;
+
+            let fnamecheck = /^[a-zA-Z ]{3,}$/;
+            let lnamecheck = /^[a-zA-Z]{3,}$/;
+            // let emailcheck = /^[A-Za-z_.]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z]{2,6}$/;
+            let mobilecheck = /^[9]{1}[78]{1}[0-9]{8}$/;
+            let addresscheck = /^[a-zA-Z0-9 ]{3,}$/;
+            let passwordcheck = /^(?=.*[0-9])(?=.*[!@#$%^*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+
+            if(fnamecheck.test(fname)){
+                document.getElementById('error-msg').innerHTML = "";
+            }else{
+                document.getElementById('error-msg').innerHTML = "** Enter valid first name";
+                return false;
+            }
+
+            if(lnamecheck.test(lname)){
+                document.getElementById('error-msg').innerHTML = "";
+            }else{
+                document.getElementById('error-msg').innerHTML = "** Enter valid lastname";
+                return false;
+            }
+
+         
+
+            if(mobilecheck.test(mobile)){
+                document.getElementById('error-msg').innerHTML = "";
+            }else{
+                document.getElementById('error-msg').innerHTML = "** Enter valid mobile number";
+                return false;
+            }
+
+            if(addresscheck.test(address)){
+                document.getElementById('error-msg').innerHTML = "";
+            }else{
+                document.getElementById('error-msg').innerHTML = "** Enter valid address";
+                return false;
+            }
+
+            if(passwordcheck.test(password)){
+                document.getElementById('error-msg').innerHTML = "";
+            }else{
+                document.getElementById('error-msg').innerHTML = "** Enter valid password";
+                return false;
+            }
+          
+
+            if(password != cpassword){
+                document.getElementById('error-msg').innerHTML = "** Password Not matched";
+                return false;
+            }
+        }
+    </script>
+
+    
+</body>
+
+</html>

@@ -1,6 +1,23 @@
-@import
-	url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+@import url('./otp.css');
+@import url('./Nav.css');
+@import url('./MostFunded.css');
+@import url('./LoginSignup.css');
+@import url('./Invest.css');
+@import url('./HowToInvest.css');
+@import url('./Home.css');
+@import url('./Header.css');
+@import url('./Footer.css');
+@import url('./details.css');
+@import url('./dashboard.css');
+@import url('./company_registration.css');
+@import url('./company_table.css');
+@import url('./my_information.css');
+@import url('./load_fund.css');
+@import url('./user_profile.css');
+/* @import url('./diversificationgraph.css'); */
+/* @import url('./viewpage.css');
+@import url('./admindashboard.css'); */
 
 * {
 	margin: 0;
@@ -10,6 +27,9 @@
 	outline: none;
 	list-style: none;
 	overflow-x: hidden;
+	font-family: Roboto Mono, Helvetica, sans-serif;
+	line-height: 1.7;
+
 }
 
 /* display: none; */
@@ -19,8 +39,11 @@
 }
 
 :root {
-	--color-blue: #007BFF;
-	--color-blue-variant: #2372c7;
+	--color-dark: #000;
+	--color-white: #fff;
+	--color-blue: #0078D7;
+	--color-blue-hover: #055596;
+
 
 	--color-gray: #6C757D;
 	--color-light-gray: #B7BDBE;
@@ -31,12 +54,27 @@
 	--color-background: #f3f3f3;
 	--color-background-variant: #f9f9f9;
 	
-	--color-dark: #000;
-	--color-white: #fff;
+	--color-info-bg: #f8f3e4;
+	--color-info: crimson;
+
 	--transition: all 400ms ease;
+
 	--container-width-lg: 75%;
 	--container-width-md: 86%;
 	--container-width-sm: 90%;
+
+	--text-sm: 0.9rem;
+
+	--color-message-positive-bg: #c7f9cc;
+	--color-message-postitive-text: #075216;
+	--color-message-positive-border: #ffca3a;
+}
+
+.warning{
+	color: #fb5607;
+	background-color: #fff6cc;
+	opacity: 0.8;
+	padding:5px;
 }
 
 html {
@@ -47,21 +85,37 @@ html {
 	/* display: none; */
 	
 }
-
-body {
-	font-family: 'Poppins', sans-serif;
-	line-height: 1.7;
-	/* background: red; */
-}
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+  }
 
 /* ===================== GENERAL STYLES ========================= */
 .container {
-	width: var(--container-width-lg);
-	margin: 0 auto;
+	width: var(--container-width-md);
+	margin: 5px auto;
 }
 
 h1, h2, h3, h4 {
-	font-weight: 500;
+	color: var(--color-dark);
+}
+h1 {
+	font-size: 1.4rem;
+	font-weight: 400;
+}
+
+h2 {
+	font-size: 1.3rem;
+	font-weight: 400;
+}
+
+h3 {
+	font-size: 1.2rem;
+	font-weight: 200;
+}
+
+h4 {
+	font-size: 1.1rem;
+	font-weight: 100;
 }
 
 h5 {
@@ -71,57 +125,83 @@ h5 {
 	margin-top: -10px;
 }
 
-h1 {
-	font-size: 2.5rem;
+textarea {
+	resize: none;
+	width: 40vw;
+	padding: 10px;
+	border: 1px solid var(--color-gray);
+	border-radius: 5px;
+	height: 8rem;
 }
-
-section {
-	/* margin-top: 6rem; */
-	padding-top: 1rem;
-	/* margin-bottom: 5rem; */
-	/* padding-bottom: 3rem; */
+.textarea-input{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 }
 
 .text-light {
 	color: var(--color-light);
 }
 
-a {
-	color: var(--color-dark);
+.link {
+	color: #fff;
 	transition: var(--transition);
 	font-size: 18px;
+	text-transform: capitalize;
 }
 
 .nav__link:hover {
 	color: var(--color-white);
 }
 
-.btn {
-	width: max-content;
-	display: inline-block;
-	color: var(--color-white);
-	padding: 0.75rem 1.2rem;
-	border-radius: 0.4rem;
-	cursor: pointer;
-	border: 1px solid var(--color-primary);
-	transition: var(--transition);
-	background: var(--color-blue);
+.nav-link-sm-text {
+	font-size: var(--text-sm);
 }
 
-.btn:hover {
-	color: var(--color-white);
-	border-color: transparent;
+.btn {
+    min-width: 100px;
+    display: inline-block;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #000;
+    transition: var(--transition);
+    font-size: 18px;
+	overflow: hidden;
+	text-transform: capitalize;
+}
+.btn:hover{
+	background: #303030;
+	color: #fff;
 }
 
 .btn-primary {
-	background: var(--color-primary);
-	color: var(--color-bg);
+	background: var(--color-blue);
+	color: #fff !important;
+}
+.btn-primary:hover{
+	background: var(--color-blue-hover);
+}
+.btn-danger{
+	background:red;
+	color: #fff !important;
+}
+.btn-danger:hover{
+	background: rgb(171, 1, 1);
 }
 
+.refund{
+	width: -webkit-fill-available;
+}
 img {
 	display: block;
 	width: 100%;
 	object-fit: cover;
+}
+i{
+	padding:0px 3px;
 }
 
 .mt-20 {
@@ -153,7 +233,109 @@ img {
 		margin-top: 6rem;
 	}
 }
+/* ============ profile dropdown =================== */
+.sub-menu-wrap{
+    position: absolute;
+    top: 130px;
+    right: 10%;
+    width: 290px;
 
+    max-height: 400px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+	box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+	background: #fff;
+	display: none;
+	transition: all 400ms ease;
+	z-index: 99;
+	/* border-radius: 10px; */
+	
+}
+.sub-menu-wrap.active-menu{
+    display: block;
+	transition: all 400ms ease;
+}
+.sub-menu-user-info h2{
+	font-size: 20px;
+    font-weight: 500;
+}
+.sub-menu{
+	padding: 0 10px;
+}
+.sub-menu-link{
+	font-size: 15px;
+}
+.sub-menu-link p{
+	margin: 5px 0;
+	color: #000;
+	transition: all 400ms ease;
+}
+.sub-menu-link p:hover{
+	margin-left: 10px;
+	transform: all 400ms ease;
+}
+
+/* ===================== 404 page not found======================== */
+.notfound__container{
+	text-align: center;
+	margin-bottom: 10rem;
+}
+.notfound__container h1{
+	margin-top: 5rem;
+	font-size: 86px;
+}
+.notfound__container h2{
+
+}
+.notfound__container h4{
+	font-size: 12px;
+	letter-spacing: 0.5px;
+	margin-bottom: 3rem !important;
+	text-transform: capitalize;
+}
+.notfound__container a{
+	color: #000 !important;
+	font-size: 15px !important;
+	user-select: none;
+}
+.notfound__container a:hover{
+	text-decoration: underline;
+}
+.news{
+    text-align: center;
+}
+.news-table{
+    width: 100%;
+    position: relative;
+    border: hidden;
+}
+
+.news-row{
+    min-height: 50px;
+    padding: 5px;
+	border: hidden;
+}
+.news-data-date{
+    color: #000 !important;
+    font-size: 16px;
+    padding: 5px 10px;
+	border: hidden;
+}
+.news-data-event{
+    text-align: left;
+    padding: 0 10px;
+    color: #000 !important;
+    font-size: 16px;
+	border: hidden;
+}
+
+.doc-img{
+    border: 1px solid green;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-left: 40%;
+}
 /* =========================== SMALL DEVICES =============================== */
 @media screen and (max-width: 640px) {
 	.container {
@@ -163,3 +345,4 @@ img {
 		margin-bottom: 2rem;
 	}
 }
+

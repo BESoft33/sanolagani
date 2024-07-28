@@ -4,13 +4,16 @@
 <html>
 <head>
 	
-  <title>View Refund Data</title>
-     <link rel="stylesheet" type="text/css" href="css/viewpage.css">
-</head>
+  <title>View Users</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/admindashboard.css}"></head>
 <body>
 	
-  <div class="container">
-    <h1>View Refund Data</h1>
+  <div class="dashboard">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
+    </div>
     <table>
       <tr>
         <th>Refund ID</th>
@@ -22,7 +25,7 @@
         <th>Amount</th>
         <th>Transaction ID</th>
         <th>Refund Request Date</th>
-        
+        <th>Action</th>
       </tr>
       <tr th:each="refund: ${refund_list}">
              <td>[[${refund.id}]]</td>
@@ -36,6 +39,14 @@
         	  <td>
                 <p th:text="${#temporals.format(refund.refund_date_time, 'yyyy-MM-dd') + ' ' + #temporals.format(refund.refund_date_time, 'HH:mm:ss')}"></p>
 			  </td>
+			  <td>
+                <button class="btn btn-danger"
+                    th:onclick="|window.location.href='/admin/refund/approve/'+${refund.id}|">Approve</button>
+             </td>
+             <td>
+                <button class="btn btn-danger"
+                    th:onclick="|window.location.href='/admin/refund/reject/'+${refund.id}|">Reject</button>
+             </td>
       </tr>
       <!-- Add more user rows here -->
     </table>

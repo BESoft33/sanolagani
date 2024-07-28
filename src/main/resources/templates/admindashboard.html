@@ -2,49 +2,17 @@
 <html>
 
 <head>
-  <style>
-    ul{
-      list-style: none;
-    }
-    .card li{
-      display: flex;
-      justify-content: space-between;
-    }
-    .stats{
-      width:180px;
-    }
-  </style>
-  <meta charset="UTF-8">
   <title>Dashboard</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/viewpage.css}">
-  <link rel="stylesheet" type="text/css" th:href="@{/css/admindashboard.css}">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+  <head th:replace="fragment/admin-head.html :: head"></head>
 </head>
 
 <body>
 
- <div class="dashboard">
-    <div class="sidebar">
-      <h2>Dashboard</h2>
-      <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
-    </div>
-                 
-        <div class="main-content">
-           <!-- Main Content Card -->
-            <div class="card">
-             <h2>Welcome to the Admin Dashboard</h2>
-        <div class="card">
-            <h3>Investment Performance</h3>
-            <canvas id="investment-chart"></canvas>
-         </div>
-      </div>
 
   <div class="dashboard">
     <div class="sidebar">
-      <h2>Dashboard</h2>
+      <h2>Admin</h2>
       <ul th:insert="fragment/admin-dashboard.html :: dashboard-left"></ul>
-
     </div>
 
     <div class="main-content">
@@ -78,23 +46,6 @@
           </ul>
         </div>
         <br/><br/>
-        <div class="card stats">
-          <h3>Statistics</h3>
-          <ul>
-            <li>
-              <span class="stat-label">Users:</span>
-              <span class="stat-value">[[${usercount}]]</span>
-            </li>
-            <li>
-              <span class="stat-label">Companies:</span>
-              <span class="stat-value">[[${companycount}]]</span>
-            </li>
-            <li>
-              <span class="stat-label">Transactions:</span>
-              <span class="stat-value">[[${transactioncount}]]</span>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>
@@ -103,7 +54,6 @@
     function fundManagement() {
       document.getElementById("fundManagement").classList.toggle("show");
     }
-
 
     // Sample data for the chart
     const investmentData = {

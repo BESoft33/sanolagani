@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Dashboard - Investment Details</title>
+        <link rel="stylesheet" th:href="@{/css/company_investment-details.css}">
+        <link rel="stylesheet" th:href="@{/css/companydashboard.css}">
+    <style>
+            </style>
+</head>
+<body>
+    <div class="container">
+        <div th:replace="fragment/company-dashboard.html :: sidebar"></div>
+        <div class="investment-details">
+            <!-- <h1>Investment Details</h1> -->
+            <form th:action="@{/company/overview}" method="POST" class="chart-container">
+                <div class="input-field" >
+                    <input type="text" name="title" id="title" placeholder="Title" />
+                </div>
+                <div class="input-field">
+                    <label for="audit_report" class="input-label">
+                        <input type="file" class="file-input" name="audit_report" id="audit-report"/>
+                        <span for="audit_report" class="help-text">Upload your audit report</span>
+                    </label>
+                    <span id="file-name" class="file-name">No file selected</span>
+                </div>
+                <button type="submit" class="button" style="margin-left:3rem;">Submit</button>
+            </form><br/>
+            <h1>Audit Reports</h1>
+            <div class="investment-item">
+                <div class="investment-item-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="investment-item-content">
+                    <div class="investment-item-date" style="width:200px;">2019, Dec 30</div>
+                </div>
+                <div class="investment-item-content">
+                    <div class="investment-item-date" style="width:200px;">File Name</div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+    </div>
+</body>
+</html>

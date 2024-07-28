@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragment/head.html :: headerfiles">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+
+<body>
+	<header class='container header__container' th:replace="fragment/header.html :: header"></header>
+
+	<div class='full__width' th:insert="fragment/nav.html :: navbar">
+	</div>
+
+	<!-- Permission Denied -->
+	<!-- css are on style.css -->
+	<section>
+		<div class="container notfound__container">
+			<h1>403</h1>
+			<h2>Oops, Permission Denied</h2>
+			<h4>Sorry, you don't have permission to access this page!!</h4>
+			<a href="/">Go Back To Home Page</a>
+		</div>
+	</section>
+	<!-- Footer -->
+	<footer th:insert="fragment/footer.html :: footer"></footer>
+	<!-- <div class=" m -3 col text-center">
+		<h1>Sorry, you don't have permission to access this page!!</h1>
+	</div> -->
+</body>
+
+</html>

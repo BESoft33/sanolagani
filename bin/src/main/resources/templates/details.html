@@ -8,35 +8,47 @@
         <div class='full__width' th:insert="fragment/nav.html :: navbar"></div>
 
         <!-- Details -->
-        <section>
+        <section class="details">
             <div class="container details__container">
                 <!-- left details -->
                 <div class="left__detail">
                     <div class="left__detail-main">
-                        <h5><span>[[${company.companyname}]]</span> &nbsp; Rs. <span>[[${company.price_per_share}]]</span> per
-                            share</h5>
-                        <h2>Bhoklagyo - Feeding the distanced customer with taste.</h2>
-    
-                        <form th:action="@{/paywithcollateral}" class="detail__form" method="post">
-                            <div class="details__buttons">
-                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
-                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
-                                <button class="btn btn-light">Rs. <span class="amount">100,000</span></button>
-                            </div>
+
+                        <h5><span>[[${company.companyname}]]</span> &nbsp; Rs. <span>[[${company.price_per_share}]]</span> per share</h5>
+<!--                        <h2>Bhoklagyo - Feeding the distanced customer with taste.</h2>-->
+<!--                        <span id="company-id" hidden>[[${company.id}]]</span>-->
+                        <input type="hidden" id="company-id" name="companyId" th:value="${company.id}">
+                        <span id="pps" hidden>[[${company.price_per_share}]]</span>
+                        <span id="maxq" hidden>[[${remainingQuantity}]]</span>
+
+                        <div class="details__buttons">
+                            <button class="btn btn-light amount" th:with="min=${remainingQuantity * 0.1 * company.price_per_share}">
+                                Rs. [[${#numbers.formatInteger(min, 3, 'COMMA')}]]
+                            </button>
+                            <button class="btn btn-light amount" th:with="mid=${remainingQuantity * 0.5 * company.price_per_share}">
+                                Rs. [[${#numbers.formatInteger(mid, 3, 'COMMA')}]]
+                            </button>
+                            <button class="btn btn-light amount" th:with="max=${remainingQuantity * company.price_per_share}">
+                                Rs. [[${#numbers.formatInteger(max, 3, 'COMMA')}]]
+                            </button>
+                        </div>
                             <div class="detail__amount">
-								<input type="hidden" id="companyId" name="companyId" th:value="${company.id}">
                                 <span>Amount: Rs.&nbsp;
-                                    <input type="number"
-                                            class="detail__input" name="amount" oninput="this.value = 
-                                            !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" id="paymentAmount">
+                                    <input type="number" class="detail__input"  min="1" oninput="validity.valid||(value='')" name="amount" id="paymentAmount">
                                 </span>
-                                <button class="btn" id="pay" type="submit">Pay with collateral</button>
+                                <span id="message" style="color:crimson; background-color: #ff22gg"></span>
+
+                                <button class="btn btn-primary" id="confirm">Confirm</button>
+
                             </div>
-                        </form>
                     </div>
 
                     <div class="dropdown">
-                        <div id="fund-management">Fund Management</div>
+                        <div id="payment-error-message" th:if="${message}">
+                            Transaction [[${message}]] !
+                        </div>
+
+                        <div id="fund-management">Choose Payment Option</div>
                         <div id="payment-options" class="pay-button-group">
 
                             <button href="#" value="KHALTI" class="pay" id="payment-button">
@@ -58,59 +70,52 @@
 
                 <!-- right details -->
                 <div class="right__detail">
-                    <h2>1,103 Shares</h2>
+                    <h2><span id="units"></span>&nbsp;Units</h2>
                     <div class="detail__shares">
                         <p>Investment Amount</p>
-                        <p>Rs.<span>1,60,000</span></p>
+                        <p>Rs.<span id="amount">0</span></p>
                     </div>
                     <div class="detail__shares">
                         <p>Fees</p>
-                        <p>Rs.<span>5,600</span></p>
+                        <p>Rs.<span id="fees">0</span></p>
                     </div>
                     <div class="detail__shares bold">
                         <p>Total Amount</p>
-                        <p>Rs.<span>1,60,000</span></p>
+                        <p>Rs.<span id="total">0</span></p>
                     </div>
                     <br>
-                    <div class="detail__shares">
-                        <p>Base Shares (Rounded Up)</p>
-                        <p>1014</p>
-                    </div>
-                    <div class="detail__shares bold">
-                        <p>Total Shares</p>
-                        <p>1014</p>
-                    </div>
+
                     <div class="detail__info">
                         <p>I acknowledge that clicking "Submit Investment" below
-                            represents an e-signatures as detailed in our <a
-                                href="#" class="additinoal__info">terms of use</a>. I acknowledge that my
-                            account and payment informatino will be saved to
-                            file
-                            for future transactions on my account. I acknowledge
+                            represents an e-signatures as detailed in our
+                            <a href="#" class="additinoal__info">terms of use</a>.
+                            I acknowledge that my account and payment informatino will be saved to
+                            file for future transactions on my account. I acknowledge
                             that I have reviewed and understand the educatinoal
                             materials. I understand that the entire amount of my
                             investment is at risk and may be lost, and aim in a
                             financial positin to bear the loss of the
-                            investment.</p>
+                            investment.
+                        </p>
 
                         <p>I confirm that this purchase price is not more than
-                            the
-                            greater of 10% of my annual income or net worth (or
-                            no
-                            more than the greater of 10% of revenue or net
-                            assets
-                            for a business), unless I am an accredited investor.</p>
+                            the greater of 10% of my annual income or net worth (or
+                            no more than the greater of 10% of revenue or net
+                            assets for a business), unless I am an accredited investor.
+                        </p>
 
                         <p>I have read and agreee to the terms set in the <a
                                 href="#" class="additinoal__info">Subscription Agreement</a>.</p>
 
-                        <p>By clicking "Submit Investment" you agree with our <a
-                                href="#" class="additinoal__info">Trems and Conditinos</a> & <a href="#">Privacy
-                                Policy</a></p>
+                        <p>By clicking "Submit Investment" you agree with our
+                            <a href="#" class="additinoal__info">Trems and Conditinos</a> & <a href="#">Privacy Policy</a>
+                        </p>
                     </div>
-
-                    <button type="submit" class="btn btn-success">Submit
-                        Investment</button>
+                    <form th:action="@{/paywithcollateral}" class="detail__form" method="post">
+                        <input type="hidden" id="companyId" name="companyId" th:value="${company.id}">
+                        <input type="hidden" id="totalAmount" name="amount">
+                        <button type="submit" class="btn btn-primary" disabled id="submit">Pay with Collateral</button>
+                    </form>
 
                 </div>
             </div>
@@ -124,5 +129,10 @@
     <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script th:src="@{/js/payment.js}"></script>
-    
+
+    <script th:inline="javascript" th:src="@{/js/amount.js}">
+
+
+    </script>
+
 </html>

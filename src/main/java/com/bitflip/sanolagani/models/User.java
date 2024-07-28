@@ -13,11 +13,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 import org.springframework.stereotype.Component;
-
 @Component
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -25,9 +24,9 @@ public class User {
 	private String fname;
 	@Column
 	private String lname;
+	
 	@Email(message = "please insert valid email address")
 	private String email;
-	@Column
 	private String password;
 	@Column
 	private String phnum;

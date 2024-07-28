@@ -20,7 +20,7 @@
 .login__right{
     /* border: 1px solid black; */
     margin-top: 2rem;
-    width: 48%;
+    width: 45%;
     padding: 2rem 4rem;
 }
 .login__right form{
@@ -38,6 +38,7 @@
 .heading__background h2{
     padding: 0 20px;
     border-radius: 10px;
+    color: #000;
 }
 .input__box{
     line-height: 2.2rem;
@@ -51,9 +52,10 @@
     border: none;
 }
 .btn__login{
-    width: 100%;
+    width: 100%  !important;
     font-size: 18px;
     text-align: center;
+    height: 40px !important;
 }
 .btn__login:hover{
     background: var(--color-blue-variant);
@@ -62,16 +64,24 @@
     margin-top: 1rem;
     text-align: center;
 }
+h5.forgot__password a {
+    color: #000;
+}
 .forgot__password:hover{
     text-decoration: underline;
     transition: var(--transition);
     font-size: bold;
 }
-.active{
+.active {
     background: var(--color-blue);
-    border-radius: 10px;
-    color: var(--color-white);
+    border-radius: 8px;
+    min-width: 200px;
+    text-align: center;
     transition: var(--transition);
+}
+
+a.active h2 {
+    color: #fff;
 }
 .forgot__password-link:hover{
     color: #000;

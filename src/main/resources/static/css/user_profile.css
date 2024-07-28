@@ -1,0 +1,23 @@
+.user-profile{
+}
+
+.center__dashboard-edit_profile{
+    
+}
+.center__dashboard-edit_profile h2{
+    text-align: center;
+    font-size: 24px;
+}
+.center__dashboard-edit_profile form{
+    display: grid;
+    margin: 15px 0;
+}
+.edit-row{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+.edit-btn{
+    /* margin-top: 10px; */
+    width: fit-content !important;
+    margin-bottom: 10px;
+}

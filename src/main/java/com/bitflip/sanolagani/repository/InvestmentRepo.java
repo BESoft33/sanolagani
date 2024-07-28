@@ -1,6 +1,7 @@
 package com.bitflip.sanolagani.repository;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,13 +26,14 @@ Integer getTotalQuantityByUserAndCompany(@Param("userId") int userId, @Param("co
 @Query("SELECT COALESCE(SUM(i.amount),0) FROM Investment i WHERE i.user.id = :userId")
 Integer getTotalInvestedAmount(@Param("userId") int userId);
 
-@Query("SELECT COALESCE(SUM(amount),0) FROM Investment  WHERE DATE(investment_date_time)  = :date")
-double getTotalInvestedByDate(@Param("date")Date date);
+@Query("SELECT COALESCE(SUM(amount),0) FROM Investment  WHERE DATE(investment_date_time)  = :date AND company_id=:id")
+double getTotalInvestedByDate(@Param("date")Date date,int id);
 
-@Query("SELECT COALESCE(count(DISTINCT user_id),0) FROM Investment  WHERE DATE(investment_date_time)  = :date")
-int getTotalInvestedUserByDate(Date date);
+@Query("SELECT COALESCE(count(DISTINCT user_id),0) FROM Investment  WHERE DATE(investment_date_time)  = :date AND company_id=:id")
+int getTotalInvestedUserByDate(Date date,int id);
 
-List<Investment> findAllByCompany_id(int companyId);
+@Query("SELECT i FROM Investment i WHERE i.investment_date_time>=:ldt  AND company_id=:companyId")
+List<Investment> findAllByCompany_id(int companyId,LocalDateTime ldt);
 
 List<Investment> findAllByUser_id(int id);
 

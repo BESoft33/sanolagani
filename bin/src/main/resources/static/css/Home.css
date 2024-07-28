@@ -5,6 +5,7 @@
 .home__conatiner{
     display: flex;
     gap: 50px;
+    padding: 2rem 1.5rem;
 }
 .heading__info{
     
@@ -16,9 +17,42 @@
     color: var(--color-gray);
 }
 .home__left{
-    width: 50%;
+    width: 70%;
 
 }
 .home__right{
-    width: 50%;
+    width: 30%;
+}
+.bod{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+.bod thead th{
+    background-color: black;
+    color: white;
+}
+
+.bod th, .bod td{
+    padding: 1rem;
+    text-align: left;
+}
+
+.bod a{
+    color: var(--color-black);
+}
+
+.message-maximum-invested{
+    color: var(--color-message-postitive-text);
+    border: 1px dashed var(--color-message-positive-border);
+    background: var(--color-message-positive-bg);
+    border-radius: 7px;
+    font-size: .8rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    height: 2rem;
+    padding-top: .4rem;
+    line-height: 1.25rem;
 }

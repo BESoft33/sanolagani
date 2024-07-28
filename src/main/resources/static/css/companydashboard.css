@@ -38,18 +38,19 @@ body {
 }
 
 #lineChart {
-  width: 100%;
-  height: 600px;
+    width: 100%;
+    height: 600px;
 }
+
 .container {
-  display: flex;
+    display: flex;
 }
 
 .chart-container {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
-sup{
+sup {
     color: #fff;
     background-color: crimson;
     padding: 2px;
@@ -62,7 +63,7 @@ sup{
     margin-left: 5px;
 }
 
-.input-field{
+.input-field {
     margin: 10px 10px 10px 3rem;
     width: 80%;
     height: 3rem;
@@ -70,51 +71,55 @@ sup{
     border: 1px solid #ccc;
     padding: 0 0 0 2rem;
     font-size: 1.2rem;
+    display: inline-flex;
 }
 
-.file-input{
+.file-input {
     position: absolute;
     cursor: pointer;
     /* visibility: hidden; */
     opacity: 0;
     left: 330px;
     width: 235px;
-    height:3rem;
+    height: 3rem;
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #ccc;
 }
-.help-text{
+
+.help-text {
     display: block;
     margin: 1rem 0;
     font-size: 1.1rem;
     color: #555;
 }
 
-#title{
-    width: 95%;
-    height: 95%;
-    border: none;
-    font-size: 1.1rem;
-}
-#title:focus, .title{
-    outline: none;
-}
-.title{
+#title {
     width: 95%;
     height: 95%;
     border: none;
     font-size: 1.1rem;
 }
 
-#file-name{
-    position: absolute;
-    top: 88px;
-    margin-left: 120px;
+#title:focus,
+.title {
+    outline: none;
+}
+
+.title {
+    width: 95%;
+    height: 95%;
+    border: none;
+    font-size: 1.1rem;
+}
+
+#file-name {
+    margin: auto 20px;
     text-align: center;
     font-size: 1.2rem;
 }
-.input-label{
+
+.input-label {
     cursor: pointer;
     border: 1px solid #cccccc;
     border-radius: 5px;
@@ -127,19 +132,22 @@ sup{
     text-align: center;
     color: #333;
 }
+
 .input-label:invalid+span {
     color: #000000;
-  }
+}
+
 .input-label:valid+span {
     color: #ffffff;
-  }
-.management-input{
-    display:flex;
+}
+
+.management-input {
+    display: flex;
     margin: 10px 3rem;
     flex-direction: column;
 }
 
-.management-input-field{
+.management-input-field {
     display: inline-flex;
     margin: 0px;
     width: 90%;
@@ -149,10 +157,12 @@ sup{
     padding: 0 0 0 2rem;
     font-size: 1.2rem;
 }
-.management-input-field:focus{
+
+.management-input-field:focus {
     outline: none;
 }
-.button{
+
+.button {
     width: 300px;
     height: 3rem;
     border-radius: 5px;
@@ -161,4 +171,30 @@ sup{
     color: #fff;
     font-size: 1.2rem;
     cursor: pointer;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    transform: translateY(-100%);
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.animate {
+    animation-name: dropdownAnimation;
+}
+
+@keyframes dropdownAnimation {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
 }

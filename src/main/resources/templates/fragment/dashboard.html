@@ -3,19 +3,20 @@
     <div class=" dashboard__container">
         <div class="left__dashboard board" th:fragment="left-fragment">
             <div class="dashboard-title-wrap">
-                <div class="dashboard-title"><a th:href="@{/riskinfo}">Dashboard</a></div>
-                <div class="dashboard-title"><a th:href="@{/myinfo}">My Information</a></div>
-                <div class="dashboard-title"><a th:href="@{'/investmenthistory/'}">My Investment</a></div>
+                <div class="dashboard-title"><a th:href="@{/user/dashboard}">Dashboard</a></div>
+                <div class="dashboard-title"><a th:href="@{/user/riskinfo}">Investment Diversification</a></div>
+                <div class="dashboard-title"><a th:href="@{/user/myinfo}">My Information</a></div>
+                <div class="dashboard-title"><a th:href="@{'/user/investmenthistory/'}">My Investment</a></div>
                 
                 <div class="dropdown-manage-fund">
-                    <button onclick="manageFund()" class="drop-btn">
+                    <div onclick="manageFund()" class="button" style="cursor: pointer;">
                         Manage Fund
-                        <span>&nbsp;v&nbsp;</span>
-                    </button>
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
                     <div id="fundManagement" class="fundManagementContent">
-                        <div> <a th:href="@{'/collateralsummery/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a></div>
+                        <div> <a th:href="@{'/user/collateralsummery/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Collateral History</a></div>
                         
-                        <div><a th:href="@{'/fundhistory/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a></div>
+                        <div><a th:href="@{'/user/fundhistory/'+${id}+'/'}"><i class="fa-sharp fa-solid fa-arrow-right"></i>&nbsp;Fund Transfer History</a></div>
                     </div>
                 </div>
             </div>
@@ -43,7 +44,7 @@
 
             <div class="collateral__summary board">
                 <h2 class="">MY COLLATERAL SUMMARY</h2>
-                <h3 class="bold">Rs. <span id="amount"></span></h3>
+                <!-- <h3 class="bold">Rs. <span id="amount"></span></h3> -->
 
                 <div>
                     <p>Collateral balance</p>
@@ -51,8 +52,8 @@
                 </div>
 
                 <div>
-                    <a th:href="@{/loadfund}">Load</a>
-                    <a th:href="@{/refund/collateral}">Refund</a>
+                    <a th:href="@{/user/loadfund}">Load</a>
+                    <a th:href="@{/user/refund/collateral}">Refund</a>
                 </div>
             </div>
 

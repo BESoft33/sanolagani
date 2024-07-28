@@ -1,5 +1,6 @@
 .otp__section{
     margin-bottom: 4rem;
+    min-height: 60vh;
 }
 .otp__container{
     padding: 3rem;

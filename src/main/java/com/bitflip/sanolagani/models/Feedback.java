@@ -12,17 +12,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "feedback")
 public class Feedback {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column
+	
+	@Column(nullable = false, length = 100000)
 	private String feedbacktext;
+	
 	@ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 	@ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+	
 	public int getId() {
 		return id;
 	}

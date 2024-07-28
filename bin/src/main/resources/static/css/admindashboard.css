@@ -68,17 +68,29 @@ body, ul {
   cursor: pointer;
 }
 
-.dropdown-content {
-  display: none;
-}
-.dropdown-content2 {
-  display: none;
-}
-
 .dropdown-content a {
   display: block;
   padding: 10px;
 }
+.dropdown-content {
+  display: none;
+  transform: translateY(-100%);
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.animate {
+  animation-name: dropdownAnimation;
+}
+
+@keyframes dropdownAnimation {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
 
 /* Content area styles */
 .content {
@@ -87,7 +99,7 @@ body, ul {
 }
 
 /* Show dropdown content on hover */
-.dropdown:hover .dropdown-content {
+.dropdown:focus .dropdown-content {
   display: block;
 }
 

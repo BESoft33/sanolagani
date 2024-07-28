@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:insert="fragment/head.html :: headerfiles"></head>
+
 <body>
   <header class='container header__container' th:replace="fragment/header.html :: header"></header>
   <div class='full__width' th:insert="fragment/nav.html :: navbar"> </div>
@@ -9,28 +10,124 @@
   <div class="container home__conatiner">
     <div class="home__left">
       <div class="heading__info">
-        <h1>Invest in <span th:text="${company.companyname}"/></h1>
-
-        <h5 class='gray'>Feeding the distanced customer with taste.</h5>
+        <h1>Invest in <span th:text="${company.companyname}" /></h1>
       </div>
-     <div th:if="${status eq 'on limit'}">
-      <a th:href="@{'/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
+      <div th:if="${status eq 'on limit'}">
+        <a th:href="@{'/company/details/'+${company.id}+'/'}" class='btn mt-20 mb-20'> Invest Now</a>
+      </div>
+      <div th:if="${status eq 'limit reached'}" class="message-maximum-invested">
+		    <p>You have reached your maximum investment quantity. Thank you for being part of us.</p> 
+	    </div>
+	    <div th:if="${status eq 'time finish'}" class="message-maximum-invested">
+		    <p>investment for this company has closed</p> 
+	    </div>
+      <div class="full__width" style="margin: 30px 0;">
+        <nav class='container nav__container'>
+          <div class="left">
+              <ul>
+                <li><a href="#company-details"  class="nav-link-sm-text link">Details</a></li>
+                <li><a href="#documents" class="nav-link-sm-text link">Documents</a></li>
+                <li><a href="#success-stories" class="nav-link-sm-text link">Success Stories</a></li>
+                <li><a href="#management-teams" class="nav-link-sm-text link">Management</a></li>
+                <li><a th:href="@{/table/{firm}/1 (firm=${company.id})}" class="nav-link-sm-text link">Financials</a></li>
+              </ul>
+          </div>
+        </nav>
+      </div>
+      <br/>
+      <h1 id='company-details'>Company Details</h1>
+      <div th:each="article : ${articles}">
+        <div class="article">
+          <h2 th:text="${article.title}"></h2>
+          <hr/>
+          <span th:text="${article.getAuthored_date_time()}"></span>
+          <hr/>
+          <div>[(${article.getFull_text()})]</div>
+        </div>
+        <br/><br/><br/>
+      </div>
+        <br/>
+        <h1 id='management-teams'>Management Team</h1>
+          <table class="bod">
+            <thead>
+                <th>Management Team</th>
+                <th>Position</th>
+                <th>Social</th>
+            </thead>
+            <!-- <tr th:each="management : ${company.managements}">
+              <td th:text="${management.name}"></td>
+              <td th:text="${management.position}"></td>
+              <td><a th:href="${management.linkedin}">LinkedIn</a></td>
+            </tr> -->
+            <tbody>
+              <tr th:each="member : ${boardMembers}">
+                <td>[[${member.getFirstName()}]]&nbsp;
+                  [[${member.getMiddleName()}]]&nbsp;
+                  [[${member.getLastName()}]]</td>
+                </td>
+                <td>[[${member.getPosition()}]]</td>
+                <td><a href="#">LinkedIn</a></td>
+              </tr>
+            </tbody>
+          </table>
+        <br/><br/><br/>
+        <h3 id='documents'>Documents</h3>
+        <div class="news">
+          <table class="news-table">
+            <tbody>
+              <tr class="news-row">
+                  <td class="news-data-date">
+                    <a href="#" th:text="*{formattedDate}"><br>
+                    <img src="./images/voklagyo.png" alt="img" class="doc-img">
+                  </td>
+  
+                  <td class="news-data-event">
+                    <a th:href="@{'/file/'+${company.filename}+'/'+ ${company.id}}">[[${company.getFilename()}]]</a>
+                  </td>
+              </tr>
+              <tr class="news-row">
+                  <td class="news-data-date">
+                    <a href="#">May 7, 2023<br>
+                    <img src="./images/voklagyo.png" alt="img" class="doc-img">
+                  </td>
+                  <td class="news-data-event">
+                    <a href="#">News goes here</a>
+                  </td>
+              </tr>
+              <tr class="news-row">
+                  <td class="news-data-date">
+                    <a href="#">May 7, 2023<br>
+                      <img src="./images/voklagyo.png" alt="img" class="doc-img">
+                    </td>
+  
+                  <td class="news-data-event">
+                    <a href="#">News goes here</a>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <br/><br/><br/>
+        <h3 id='success-stories'>Success Stories</h3>
+        <div th:if="${is_invested}">
+			<h3>Provide Feedback</h3>
+			<form class="textarea-input" th:action="@{'/user/feedback/'+${company.id}}" method="POST">
+			    <textarea id="feedback" name="feedbacktext" rows="4" cols="50" placeholder="Type here..." required></textarea>
+          <br/>
+			    <input type="submit" value="Submit" class="btn">
+      </form>
+		</div>
     </div>
-    <div th:if="${status eq 'limit reached'}">
-		<p>you have already invested up to maximum quantity</p> 
-	</div>
-	<div th:if="${status eq 'time finish'}">
-		<p>investment for this company has closed</p> 
-	</div>
-      <p class='gray f-13'>This Reg A+ offering is made available through Sanolagani Primary.
-        This investment is speculative, illiquid, and involves a high degree of
-        risk, including possible loss of your entire investment. For more
-        information about this offering, please view <span th:text="${company.companyname}"/>’s Offering Circular
-        and Related Risks. In addition, as described in the Offering Circular,
-        the Company retains the right to continue the offering beyond the Termination Date.
-        in its sole discretion.</p>
-    </div>
-    <div class="home__right">
+
+
+    <div class="home__right" style="min-height: 60vh;">
+	<div th:if="${!iswatchlistedblank and ! #lists.contains(companyids, company.id)}"><a th:href="@{'/user/company/addtowatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;<i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
+      </div>
+      <div th:if="${!iswatchlistedblank and  #lists.contains(companyids, company.id)}"><a th:href="@{'/user/company/deletewatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;<i class="fa-solid fa-heart" ></i>&nbsp;Delete from watchlist</a><br/><br/>
+      </div>
+      <div th:if="${iswatchlistedblank}"><a th:href="@{'/user/company/addtowatchlist/'+${company.id}}" class="btn btn__primary">&nbsp;<i class="fa-regular fa-heart" ></i>&nbsp;Add to watchlist</a><br/><br/>
+      </div>
+      
       <img th:src="@{'/documents/' + ${company.id} + '/' + ${company.image}}" alt="heading" />
     </div>
   </div>
@@ -39,4 +136,5 @@
 
   </footer>
 </body>
+
 </html>

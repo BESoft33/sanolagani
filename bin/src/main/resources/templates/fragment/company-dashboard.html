@@ -1,0 +1,15 @@
+<div class="sidebar" th:fragment="sidebar">
+    <h1>Dashboard</h1>
+    <ul>
+        <li><a th:href="@{/company/companydashboard}" class="active">Dashboard</a></li>
+        <li><a th:href="@{/company/overview}">Company Overview</a></li>
+        <li><a th:href="@{/company/reports}">Upload Audit Report</a></li>
+        <!-- <li><a th:href="@{/company/all-articles}">Articles</a></li> -->
+        <li><a th:href="@{/company/management}">Management Team</a></li>
+        <li><a th:href="@{/company/investment/details}">Investment Details</a></li>
+        <li><a href="#">Financial Performance</a></li>
+        <li><a href="#">Documents and Reports</a></li>
+        <li><a th:href="@{/company/notification}">Notification<sup th:if="${unread}">[[${unread}]]</sup></a></li>
+        <li><a th:href="@{/logout}">Setting and Account Management</a></li>
+    </ul>
+</div>

@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(name = "company")
-public class Company {
+public class Company implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -69,8 +69,8 @@ public class Company {
 	@Column
 	private String pwd_change;
 
-	@ManyToMany(mappedBy = "companies", cascade = CascadeType.ALL)
-	private Set<BoardMembers> boardmembers;
+	@OneToMany(mappedBy = "company")
+	private List<BoardMembers> boardmembers;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -320,11 +320,11 @@ public class Company {
 		this.companyfilelist = companyfilelist;
 	}
 
-	public Set<BoardMembers> getBoardmembers() {
+	public List<BoardMembers> getBoardmembers() {
 		return boardmembers;
 	}
 
-	public void setBoardmembers(Set<BoardMembers> boardmembers) {
+	public void setBoardmembers(List<BoardMembers> boardmembers) {
 		this.boardmembers = boardmembers;
 	}
 

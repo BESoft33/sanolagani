@@ -3,6 +3,7 @@
 
 <head th:insert="fragment/head.html :: headerfiles">
 	<title>Register Company</title>
+	
 </head>
 
 <body>
@@ -27,16 +28,16 @@
 	<!-- Company Registration -->
 	<section class="company">
 		<div class="container comapany__container">
-			<h2>Register your company</h2>
+			<h2>Register company</h2>
 			<p class="error" th:text="${error}"></p>
 			<form th:action="@{/companyverify}" th:object="${un_company}" class="company_registration" method="POST"
 				enctype="multipart/form-data">
-				<div>
+				<div class="register-row">
 					<input class="register_input" type="text" placeholder="First Name" name="fname" th:field="*{fname}">
 					<input class="register_input" type="text" placeholder="Last Name" name="lname" th:field="*{lname}">
 				</div>
 
-				<div>
+				<div class="register-row">
 				<input class="register_input" type="text"
 					placeholder="Company Name" name="companyname"
 					th:field="*{companyname}">
@@ -44,63 +45,59 @@
 					placeholder="Company Adress" name="address">	
 					</div>
 
-				<div>
+				<div class="register-row">
 					<input class="register_input" type="email" placeholder="Company Email" name="email"
 						th:field="*{email}">
-					<input class="register_input" type="number" placeholder="Company Number" name="phnum"
+					<input class="register_input" type="number" placeholder="Company Contact Number" name="phnum"
 						th:field="*{phnum}">
 				</div>
-				<div>
-					<input class="register_input" type="text" placeholder="Website URL" name="websiteurl"
-						th:field="*{websiteurl}"> <input class="register_input" type="number"
-						placeholder="Raised Capital" name="raisedcapital" th:field="*{raisedcapital}">
+				<div class="register-row">
+					<input class="register_input" type="text" placeholder="Website URL" name="websiteurl" th:field="*{websiteurl}">
+					<input class="register_input" type="number" placeholder="Capital To Raise" name="raisedcapital" th:field="*{raisedcapital}">
 				</div>
-				<div>
-					<input class="register_input" type="text" placeholder=" sector"
-						name="sector" th:field="*{sector}"><input
-						class="register_input" type="number"
-						placeholder=" maximum quantity" name="maximum_quantity">
+				<div class="register-row">
+					<input class="register_input" type="text" placeholder=" sector" name="sector" th:field="*{sector}">
+					<input class="register_input" type="number" placeholder=" maximum quantity" name="maximum_quantity">
 				</div>
-		<div>
-				<input class="register_input register" type="text"
-					placeholder="Time Span For Raising Capital"
-					name="timespanforraisingcapital"
-					th:field="*{timespanforraisingcapital}"> <input
-					class="register_input" type="number" placeholder=" per share price"
-					name="price_per_share"> <br>
-</div>
 
-				<div class="doc_file">
+				<div class="register-row">
+					<input class="register_input" style="margin-left: 65px;" type="text" placeholder="Time Span For Raising Capital" name="timespanforraisingcapital"
+						   th:field="*{timespanforraisingcapital}">
+					<input class="register_input" type="number" placeholder="Price per Unit" name="price_per_share">
+					<br>
+				</div>
+
+				<br>
+				<div class="register-document">
 					<div>
 						<label for="companypanimg">Company image</label>
-						<input class="register_input" id="companypanimg" type="file" placeholder="Company image"
+						<input class="upload-doc" id="companypanimg" type="file" placeholder="Company image"
 							name="com_image">
 					</div>
 
 
 					<div>
-						<label for="pdfFile">Company Document PDF including tax
-							clearance: </label> <input class="register_input" id="pdfFile" type="file"
-							placeholder="Company PDF" name="pdfFile">
+						<label for="pdfFile" >Company Document PDF including tax clearance: </label>
+						<input class="upload-doc" id="pdfFile" type="file" placeholder="Company PDF" name="pdfFile">
 					</div>
 					<div>
-						<label for="companypan">Company PAN Card/VAT Card: </label> <input class="register_input"
-							id="companypan" type="file" placeholder="CompanyPDF" name="companypan" />
-					</div>
-
-					<div>
-						<label for="citizen_front">Citizen Front:</label> <input class="register_input"
-							id="citizen_front" type="file" placeholder="Citizen Front" name="citizen_front">
+						<label for="companypan">Company PAN Card/VAT Card: </label>
+						<input class="upload-doc" id="companypan" type="file" placeholder="CompanyPDF" name="companypan" />
 					</div>
 
 					<div>
-						<label for="citizen_back">Citizen Back:</label> <input class="register_input" id="citizen_back"
-							type="file" placeholder="Citizen Back" name="citizen_back" />
+						<label for="citizen_front">Citizen Front:</label>
+						<input class="upload-doc" id="citizen_front" type="file" placeholder="Citizen Front" name="citizen_front">
+					</div>
+
+					<div>
+						<label for="citizen_back">Citizen Back:</label>
+						<input class="upload-doc" id="citizen_back" type="file" placeholder="Citizen Back" name="citizen_back" />
 					</div>
 				</div>
 
-
 				<button type="submit" class="btn sumbit">Submit</button>
+
 
 			</form>
 		</div>
@@ -110,6 +107,9 @@
 	<footer>
 		<footer th:insert="fragment/footer.html :: footer"> </footer>
 	</footer>
+
+	
 </body>
 
 </html>
+
