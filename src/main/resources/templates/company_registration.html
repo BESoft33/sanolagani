@@ -30,6 +30,7 @@
 		<div class="container comapany__container">
 			<h2>Register company</h2>
 			<p class="error" th:text="${error}"></p>
+			<p id="contact-err" style="color: red; text-align: center; font-size: 14px;"></p>
 			<form th:action="@{/companyverify}" th:object="${un_company}" class="company_registration" method="POST"
 				enctype="multipart/form-data">
 				<div class="register-row">
@@ -48,7 +49,7 @@
 				<div class="register-row">
 					<input class="register_input" type="email" placeholder="Company Email" name="email"
 						th:field="*{email}">
-					<input class="register_input" type="number" min="0" placeholder="Company Contact Number" name="phnum"
+					<input class="register_input" type="number" id="contact" onkeyup="validateContact()" min="1" oninput="validity.valid||(value='')" placeholder="Company Contact Number" name="phnum"
 						th:field="*{phnum}">
 				</div>
 				<div class="register-row">
@@ -107,6 +108,20 @@
 	<footer>
 		<footer th:insert="fragment/footer.html :: footer"> </footer>
 	</footer>
+
+	<script>
+		function validateContact(){
+			let mobNum = document.getElementById('contact').value;
+
+			let checkMobNum = /^[9]{1}[78]{1}[0-9]{8}$/;
+
+			if(checkMobNum.test(mobNum)){
+				document.getElementById('contact-err').innerHTML = "";
+			}else{
+				document.getElementById('contact-err').innerHTML = "** Enter valid Number";
+			}
+		}
+	</script>
 
 	
 </body>

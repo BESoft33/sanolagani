@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.bitflip.sanolagani.models.Collateral;
 import com.bitflip.sanolagani.models.Company;
-import com.bitflip.sanolagani.models.CompanyArticles;
 import com.bitflip.sanolagani.models.Transaction;
 import com.bitflip.sanolagani.models.UnverifiedCompanyDetails;
 import com.bitflip.sanolagani.models.User;
 import com.bitflip.sanolagani.models.Investment;
 import com.bitflip.sanolagani.models.RefundRequestData;
 import com.bitflip.sanolagani.repository.CollateralRepo;
-import com.bitflip.sanolagani.repository.CompanyArticlesRepo;
 import com.bitflip.sanolagani.repository.CompanyRepo;
 import com.bitflip.sanolagani.repository.InvestmentRepo;
 import com.bitflip.sanolagani.repository.RefundRequestRepo;
@@ -50,9 +46,6 @@ public class AdminController {
 	private CollateralRepo collateralrepo;
 	@Autowired
 	private RefundRequestRepo refundrepo;
-	@Autowired
-	private CompanyArticlesRepo companyarticlesrepo;
-
 	@GetMapping("/admin/admindashboard")
 	public String getAdminDashboardPage(Model model) {
 		LocalDateTime now = LocalDateTime.now();
